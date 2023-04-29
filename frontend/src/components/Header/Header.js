@@ -10,7 +10,7 @@ import routes from "routes";
 const Header = (props) => {
     return (
         <header style={{ paddingTop: 10 }} className={styles["inner"]}>
-            <DefaultNavbar brand="Nha cua Di" routes={routes} sticky />
+            <DefaultNavbar brand="Nhà Của Di" routes={routes} sticky />
         </header>
     );
 };
