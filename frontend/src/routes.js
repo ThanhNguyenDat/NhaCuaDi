@@ -25,8 +25,6 @@ WaitingComponent.propTypes = {
 const routes = [
     {
         path: "/",
-        name: "dashboard",
-        icon: <Icon>dashboard</Icon>,
         element: <Navigate to="/app" replace />,
     },
     {
@@ -35,16 +33,17 @@ const routes = [
         element: <AppLayout />,
         children: [
             {
-                path: "",
+                path: "/app",
+                name: "App",
                 element: <h1>app</h1>,
             },
             {
                 path: "dashboard",
+                name: "Dashboard",
                 element: <h2>dashboard</h2>,
             },
         ],
     },
-
     {
         path: "/auth/login",
         element: (
