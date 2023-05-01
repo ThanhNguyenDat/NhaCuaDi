@@ -1,7 +1,7 @@
 // const { default: APIUtils } = require('../utils/APIUtils');
 import * as APIUtils from "../utils/APIUtils";
 
-const baseURL = "http://0.0.0.0:8000";
+const baseURL = "http://0.0.0.0:6001";
 
 export const signInRequest = (data) => {
     return APIUtils.post(`${baseURL}/api/account/signin`, data);
@@ -16,7 +16,7 @@ export const logoutRequest = () => {
 };
 
 export const getListUserRole = () => {
-    return APIUtils.get(`${baseURL}/api/account/get-roles`);
+    return APIUtils.get(`${baseURL}/api/account/get-all-roles`);
 };
 
 export const changePassword = (data) => {

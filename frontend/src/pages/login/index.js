@@ -29,7 +29,6 @@ const Login = () => {
             // Store.removeNotification(); //bug
             try {
                 const result = await signIn(values);
-                console.log("logined: ", result);
                 navigate("/"); // redirect /
             } catch (err) {
                 // Store.addNotification({

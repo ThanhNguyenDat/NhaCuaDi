@@ -2,8 +2,10 @@ import React, { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import Icon from "@mui/material/Icon";
+import AuthComponent from "hocs/withAuthRequired";
 
 import AppLayout from "./layouts/AppLayout";
+import UserPage from "./pages/users/UserPage";
 
 const LoginPage = lazy(() => import("./pages/login"));
 const Notfound = lazy(() => import("./pages/notfound"));
@@ -25,22 +27,56 @@ WaitingComponent.propTypes = {
 const routes = [
     {
         path: "/",
-        element: <Navigate to="/app" replace />,
+        element: (
+            <AuthComponent>
+                <AppLayout />
+            </AuthComponent>
+        ),
     },
     {
-        path: "/app",
-        name: "app",
+        path: "/category",
+        name: "Bai Viet",
+        // element: <AppLayout />,
+        children: [
+            {
+                path: "/category",
+            },
+            {
+                path: "/category/hoc-tap",
+                name: "Hoc tap",
+                element: <h2>Hoc Tap</h2>,
+            },
+        ],
+    },
+    {
+        path: "/users",
+        name: "Users",
+        element: (
+            <AuthComponent>
+                <AppLayout />
+            </AuthComponent>
+        ),
+        children: [
+            {
+                path: "/users",
+                name: "User",
+                element: (
+                    <AuthComponent roles={["admin"]}>
+                        <UserPage />
+                    </AuthComponent>
+                ),
+            },
+        ],
+    },
+    {
+        path: "/lessons",
+        name: "Lessons",
         element: <AppLayout />,
         children: [
             {
-                path: "/app",
-                name: "App",
-                element: <h1>app</h1>,
-            },
-            {
-                path: "dashboard",
-                name: "Dashboard",
-                element: <h2>dashboard</h2>,
+                path: "/lessons",
+                name: "Lessons",
+                element: <UserPage />,
             },
         ],
     },
