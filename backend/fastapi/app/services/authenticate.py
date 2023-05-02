@@ -16,6 +16,7 @@ from ..schemas.accountSchema import TokenData
 
 from ..database.postgres import DBSession
 from ..common.http_exceptions import *
+from ..common.helpers import *
 
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
 ALGORITHM = "HS256"
@@ -41,6 +42,15 @@ def get_user(username):
     
     return user
 
+
+def get_all_users():
+    session = DBSession()
+    users = session.query(Users).all()
+    users = [parseUserFromDB(user) for user in users]
+    session.close()
+    
+    return users
+
 def add_new_user(username, password, email, fullname, avatar, dob):
     session = DBSession()
 
@@ -58,6 +68,9 @@ def add_new_user(username, password, email, fullname, avatar, dob):
     user = get_user(username=username)
     
     return user
+
+def delete_user(uid):
+    pass
 
 def get_roles():
     session = DBSession()

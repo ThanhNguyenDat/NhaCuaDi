@@ -13,7 +13,7 @@ import json
 
 import psycopg2
 
-from .routes import account, users
+from .routes import account
 
 # postgresql://postgres:postgres@db:5432/asr_label
 postgres_config = {
@@ -44,13 +44,6 @@ app.include_router(
     account.router,
     prefix="/api/account",
     tags=["account"],
-    responses={404: {"description": "Not found"}},
-)
-
-app.include_router(
-    users.router,
-    prefix="/api/users",
-    tags=["users"],
     responses={404: {"description": "Not found"}},
 )
 
