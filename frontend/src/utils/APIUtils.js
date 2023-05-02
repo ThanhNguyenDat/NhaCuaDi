@@ -61,4 +61,9 @@ export const post = async (path, data = {}) => {
     return responseHandler(response.data);
 };
 
+export const _delete = async (path, data = {}) => {
+    const response = await APIUtils.delete(path, data);
+    return responseHandler(response.data);
+};
+
 export default APIUtils;

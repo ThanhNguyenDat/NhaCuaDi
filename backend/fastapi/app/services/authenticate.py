@@ -9,7 +9,7 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 
 from typing_extensions import Annotated
-from sqlalchemy.sql import text
+from sqlalchemy.sql import text, delete
 
 from ..models.accountModel import Users, Roles, UserRole
 from ..schemas.accountSchema import TokenData
@@ -70,7 +70,12 @@ def add_new_user(username, password, email, fullname, avatar, dob):
     return user
 
 def delete_user(uid):
-    pass
+    session = DBSession()
+    sql1 = session.query(UserRole).filter_by(user_id=uid).delete()
+    sql2 = session.query(Users).filter_by(id=uid).delete()
+    session.commit()
+    session.close()
+    return True
 
 def get_roles():
     session = DBSession()

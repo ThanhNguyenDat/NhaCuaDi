@@ -4,7 +4,8 @@ import { takeLatest, call, put } from "redux-saga/effects";
 import { getListUsers, addNewUser } from "services/api";
 
 import { callbackSuccess, callbackError } from "redux/helpers";
-import { ADD_NEW_USER_ASYNC, GET_LIST_USERS_ASYNC } from "./users.action";
+import { ADD_NEW_USER_ASYNC, DELETE_USER_ASYNC, GET_LIST_USERS_ASYNC } from "./users.action";
+import { deleteUser } from "services/api";
 
 function* handleGetListUsers({ ctx }) {
     try {
@@ -21,9 +22,23 @@ function* handleGetListUsers({ ctx }) {
 
 function* handleAddNewUser({ ctx }) {
     try {
-        
         yield put({ type: ADD_NEW_USER_ASYNC.START });
-        const result = yield call(addNewUser, {...ctx});
+        const result = yield call(addNewUser, { ...ctx });
+        yield put({ type: ADD_NEW_USER_ASYNC.SUCCESS });
+        callbackSuccess(ctx, result);
+    } catch (err) {
+        console.log(err);
+        yield put({ type: ADD_NEW_USER_ASYNC.FAIL, error: err });
+        callbackError(ctx, err);
+    }
+}
+
+function* handleDeleteUser({ ctx }) {
+    try {
+        const uid = ctx?.uid ?? "";
+        console.log("uid: ", uid);
+        yield put({ type: ADD_NEW_USER_ASYNC.START });
+        const result = yield call(deleteUser, uid);
         yield put({ type: ADD_NEW_USER_ASYNC.SUCCESS });
         callbackSuccess(ctx, result);
     } catch (err) {
@@ -36,4 +51,5 @@ function* handleAddNewUser({ ctx }) {
 export default function* usersSaga() {
     yield takeLatest(GET_LIST_USERS_ASYNC.HANDLER, handleGetListUsers);
     yield takeLatest(ADD_NEW_USER_ASYNC.HANDLER, handleAddNewUser);
+    yield takeLatest(DELETE_USER_ASYNC.HANDLER, handleDeleteUser);
 }

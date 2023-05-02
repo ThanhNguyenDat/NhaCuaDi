@@ -50,8 +50,6 @@ async def signin(request: Request):
     port_client = request.client.port
     print(f'{ip_client}:{port_client}')
 
-
-
     content = {
         "data": {
             "access_token": access_token
@@ -62,7 +60,6 @@ async def signin(request: Request):
 
     responses = JSONResponse(content)
     return responses
-
 
 @router.get("/login-info")
 async def get_login_info(
@@ -164,13 +161,22 @@ async def add_account(
     response = JSONResponse(content=content)
     return response
 
-@router.delete("/delete/{id}")
+@router.delete("/delete-account/{uid}")
 async def delete_account(
     current_user: Annotated[UserSchema, Depends(admin_permission)],
-    id
+    uid: str
 ):
+    uid = int(uid)
+    status = delete_user(uid=uid)
     
-    return {'id': id}
+    content = {
+        "data": status,
+        "error_code": 0,
+        "message": "Delete successfully"
+
+    }
+    response = JSONResponse(content=content)
+    return response
 
 @router.put("/update-user-role")
 async def update_user_role(

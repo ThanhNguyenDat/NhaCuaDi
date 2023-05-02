@@ -19,6 +19,7 @@ import {
     DatePicker,
     Upload,
     message,
+    Popconfirm,
 } from "antd";
 
 import { TiUserDeleteOutline } from "react-icons/ti";
@@ -39,6 +40,7 @@ import { Col, Label, Row } from "reactstrap";
 import { role_colors } from "constants/color/roles";
 import { addNewUserAsync } from "redux/users/users.action";
 import { signInAsync } from "redux/auth/authActions";
+import { deleteUserAsync } from "redux/users/users.action";
 
 dayjs.extend(customParseFormat);
 const dateFormat = "DD-MM-YYYY";
@@ -95,6 +97,10 @@ const UserPage = () => {
     );
     const _addNewUser = useCallback(
         (ctx) => withPromiseAndDispatch(addNewUserAsync, ctx, dispatch),
+        [dispatch]
+    );
+    const _deleteUser = useCallback(
+        (ctx) => withPromiseAndDispatch(deleteUserAsync, ctx, dispatch),
         [dispatch]
     );
 
@@ -172,33 +178,39 @@ const UserPage = () => {
                             showModalEditUser();
                         }}
                     />
-
-                    <TiUserDeleteOutline
-                        color="red"
-                        style={{
-                            cursor: "pointer",
-                        }}
-                        onClick={(event) => {
+                    <Popconfirm
+                        placement="top"
+                        title="Are you sure to delete this user?"
+                        description={`Delete ${record.fullname}`}
+                        onConfirm={()=>{
                             handleDeleteAccount(record);
+                            message.info("Delete success");
                         }}
-                    />
+                        okText="Yes"
+                        cancelText="No"
+                    >
+                        <TiUserDeleteOutline
+                            color="red"
+                            style={{
+                                cursor: "pointer",
+                            }}
+                        />
+                    </Popconfirm>
                 </Space>
             ),
         },
     ];
 
     // Handle delete user
-    const handleDeleteAccount = (record) => {
+    const handleDeleteAccount = async (record) => {
         // call api
-
-        _getListUsersAsync();
-        // Call api xong => delete code below
-        // update UI
-        const newDataTable = [...dataTable];
-        const id = newDataTable.findIndex((item) => item.uid === record.uid);
-        newDataTable.splice(id, 1);
-
-        setDataTable(newDataTable);
+        try {
+            const uid = record.uid;
+            const status = await _deleteUser({ uid });
+            _getListUsersAsync();
+        } catch (err) {
+            console.log("delete fail");
+        }
     };
 
     // Handle Modal for Edit User
@@ -228,8 +240,8 @@ const UserPage = () => {
                 formValues[key] = "";
             }
         });
-        formValues['dob'] = dob;
-        
+        formValues["dob"] = dob;
+
         // api for create user
         const result = await _addNewUser(formValues);
         formUser.resetFields();
@@ -244,7 +256,7 @@ const UserPage = () => {
     const onSelectDob = (date, dateString) => {
         console.log(date, dateString);
         setDob(dateString);
-    }
+    };
 
     // Upload Image
     const getBase64 = (img, callback) => {
@@ -478,7 +490,7 @@ const UserPage = () => {
                                 format={dateFormat}
                                 // defaultValue={dayjs('', dateFormat)}
                                 onChange={onSelectDob} /> */}
-                                <Input/>
+                                <Input />
                             </Form.Item>
                         </Col>
                     </Row>

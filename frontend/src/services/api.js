@@ -30,3 +30,7 @@ export const getListUsers = () => {
 export const addNewUser = (data) => {
     return APIUtils.post(`${baseURL}/api/account/add-account`, data);
 };
+
+export const deleteUser = (uid) => {
+    return APIUtils._delete(`${baseURL}/api/account/delete-account/${uid}`);
+};

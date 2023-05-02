@@ -1,4 +1,4 @@
-import { GET_LIST_USERS_ASYNC, ADD_NEW_USER_ASYNC } from "./users.action";
+import { GET_LIST_USERS_ASYNC, ADD_NEW_USER_ASYNC, DELETE_USER_ASYNC } from "./users.action";
 
 const initialUsersState = {
     list: [],
@@ -28,6 +28,18 @@ export default function usersReducer(state = initialUsersState, action) {
         }
 
         case ADD_NEW_USER_ASYNC.FAIL: {
+            return { ...state, fetching: false };
+        }
+
+        case DELETE_USER_ASYNC.START: {
+            return { ...state, fetching: true };
+        }
+
+        case DELETE_USER_ASYNC.SUCCESS: {
+            return { ...state, fetching: false };
+        }
+
+        case DELETE_USER_ASYNC.FAIL: {
             return { ...state, fetching: false };
         }
 
