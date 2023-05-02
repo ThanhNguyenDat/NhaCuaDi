@@ -3,7 +3,7 @@ from typing import Union
 import json
 
 from fastapi import Depends
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordBearer
 
 from jose import JWTError, jwt
 from passlib.context import CryptContext
@@ -15,7 +15,7 @@ from ..models.accountModel import Users, Roles, UserRole
 from ..schemas.accountSchema import TokenData
 
 from ..database.postgres import DBSession
-from .http_exceptions import *
+from ..common.http_exceptions import *
 
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
 ALGORITHM = "HS256"
@@ -41,11 +41,13 @@ def get_user(username):
     
     return user
 
-def add_new_user(username, password, email):
+def add_new_user(username, password, email, fullname, avatar, dob):
     session = DBSession()
 
     password_hashed = pwd_context.hash(password)
-    user = Users(username=username, password=password_hashed, email=email)
+    dob = datetime.strptime(dob, "%d/%m/%Y").date()
+
+    user = Users(username=username, password=password_hashed, email=email, fullname=fullname, avatar=avatar, dob=dob)
     session.add(user)
     session.commit()
     session.close()

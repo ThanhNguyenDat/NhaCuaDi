@@ -10,20 +10,16 @@ from passlib.context import CryptContext
 from typing_extensions import Annotated
 from ..common.http_exceptions import IncorrectUsernamePasswordException
 
-from ..common.authenticate import *
+from ..services.authenticate import *
 
 from ..common.http_exceptions import *
 from ..common.helpers import get_info_role
 
 from ..schemas.accountSchema import User as UserSchema
 
-ACCESS_TOKEN_EXPIRE_MINUTES = 30 # API ACCESS TIME
+ACCESS_TOKEN_EXPIRE_DAYS = 1 # API ACCESS TIME
 
 router = APIRouter()
-
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 @router.post("/signin")
 async def signin(request: Request):
@@ -38,12 +34,21 @@ async def signin(request: Request):
     if not authen_user:
         raise IncorrectUsernamePasswordException
     
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token_expires = timedelta(days=ACCESS_TOKEN_EXPIRE_DAYS)
 
     access_token = create_access_token(
         data={"sub": username},
         expires_delta=access_token_expires
     )
+
+    # get ip port
+    # DO FOR SESSION LOGIN
+    # Get ip and port of client
+    ip_client = request.client.host
+    port_client = request.client.port
+    print(f'{ip_client}:{port_client}')
+
+
 
     content = {
         "data": {
@@ -61,7 +66,6 @@ async def signin(request: Request):
 async def get_login_info(
     current_user: Annotated[UserSchema, Depends(get_current_user)]
 ):
-    print("user role: ", current_user.username, current_user.role_ids)
     content = {
         "error_code": 0,
         "data": {
@@ -101,7 +105,12 @@ async def add_account(
     username = req_json.get("username", "")
     password = req_json.get("password", "")
     email = req_json.get("email", "")
+    fullname = req_json.get("fullname", "")
+    avatar = req_json.get("avatar", "")
+    dob = req_json.get('dob', "")
+
     role_names = req_json.get("roles", ["guest"]) # role is role_ids
+    
     if isinstance(role_names, str):
         role_names = [role_names]
         
@@ -111,7 +120,7 @@ async def add_account(
         raise UserExistException
     
     # add new user
-    new_user = add_new_user(username, password, email)
+    new_user = add_new_user(username, password, email, fullname, avatar, dob)
     
     # check role exist
     role_ids = []
@@ -144,4 +153,3 @@ async def update_user_role(
 ):
     req_json = await request.json()
 
-    

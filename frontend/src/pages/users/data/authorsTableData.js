@@ -28,7 +28,7 @@ export function Author({ image, name, email }) {
     );
 }
 
-function Function({ job, org }) {
+export function Function({ job, org }) {
     return (
         <SoftBox display="flex" flexDirection="column">
             <SoftTypography variant="caption" fontWeight="medium" color="text">

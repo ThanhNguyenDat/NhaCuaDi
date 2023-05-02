@@ -47,7 +47,7 @@ function AuthComponent(props) {
 
     function checkPermission(permissionRoles, userRoleNames) {
         let check = false;
-        
+
         permissionRoles.forEach((permissionRole) => {
             if (userRoleNames.includes(permissionRole)) {
                 check = true;
@@ -60,13 +60,12 @@ function AuthComponent(props) {
         // allow multi roles
         const userRoleNames = [];
         user.role_ids.forEach((role_id) => {
-            
             const userRoleName = getRoleNameById(role_id, allRoles);
             userRoleNames.push(userRoleName);
         });
 
         if (!_.isEmpty(permissionRoles) && !checkPermission(permissionRoles, userRoleNames)) {
-            alert("Permission is denied !!!");
+            // alert("Permission is denied !!!");
             return false;
         }
         return true;

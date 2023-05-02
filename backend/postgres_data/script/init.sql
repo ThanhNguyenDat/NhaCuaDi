@@ -3,7 +3,11 @@ CREATE TABLE "users" (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(128) NOT NULL,
-    email VARCHAR(120) NOT NULL UNIQUE
+    email VARCHAR(120) NOT NULL UNIQUE,
+    fullname VARCHAR DEFAULT '',
+    avatar VARCHAR DEFAULT '',
+    dob TIMESTAMP DEFAULT '1945-01-01',
+    created_time TIMESTAMP DEFAULT NOW()
 );
 
 
@@ -25,6 +29,16 @@ CREATE TABLE "user_role" (
     CONSTRAINT "fk_user_role_roles_id" FOREIGN KEY ("role_id") REFERENCES "roles" ("id")
 );
 
+CREATE TABLE "session_login" (
+    -- n:1 "users"
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    access_token VARCHAR NOT NULL,
+    login_at TIMESTAMP NOT NULL,
+    logout_at TIMESTAMP NOT NULL,
+
+    CONSTRAINT "fk_session_login_users_id" FOREIGN KEY ("user_id") REFERENCES "users" ("id")
+);
 
 -- Table For Lessons
 CREATE TABLE "lessons" (
@@ -44,7 +58,7 @@ INSERT INTO "users" (
     email
 ) VALUES ('admin', 'admin', 'admin@gmail.com'),
         ('student', '$2b$12$mKiyafcRqa6wFg3N6/YQJOuoVbEyGAZB0gDQ5Tbac9meAF11ZTZ5q', 'student@gmail.com'),
-        ('guest', 'guest', 'guest@gmail.com');
+        ('guest', '$2b$12$B37dlhMQMbLVpk/IUMpdluN5lNTEqNz5yilOGfB2zmZ5rPhQ0dggC', 'guest@gmail.com');
 
 
 INSERT INTO "roles" (
@@ -65,3 +79,4 @@ INSERT INTO "user_role" (
 ) VALUES (1, 1),
         (1, 2),
         (2, 7);
+

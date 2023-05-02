@@ -22,93 +22,120 @@
 
 // export default UserPage;
 
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
+import { Link } from "react-router-dom";
+
+import Card from "@mui/material/Card";
 import { Button, Form, Space, Table, Tag, Modal, Input, Checkbox } from "antd";
-import team2 from "../../assets/images/team-2.jpg";
-import { Author } from "./data/authorsTableData";
 import { useForm } from "antd/es/form/Form";
-const columns = [
-    {
-        title: "Name",
-        dataIndex: "name",
-        key: "name",
-        // render: (text) => <a>{text}</a>,
-        render: () => <Author image={team2} name="John Michael" email="john@creative-tim.com" />,
-    },
-    {
-        title: "Age",
-        dataIndex: "age",
-        key: "age",
-    },
-    {
-        title: "Address",
-        dataIndex: "address",
-        key: "address",
-    },
-    {
-        title: "Tags",
-        key: "tags",
-        dataIndex: "tags",
-        render: (_, { tags }) => (
-            <>
-                {tags.map((tag) => {
-                    let color = tag.length > 5 ? "geekblue" : "green";
-                    if (tag === "loser") {
-                        color = "volcano";
-                    }
-                    return (
-                        <Tag color={color} key={tag}>
-                            {tag.toUpperCase()}
-                        </Tag>
-                    );
-                })}
-            </>
-        ),
-    },
-    {
-        title: "Action",
-        key: "action",
-        render: (_, record) => (
-            <Space size="middle">
-                <a>Invite {record.name}</a>
-                <button
-                    onClick={() => {
-                        console.log("record: ", record);
-                    }}
-                >
-                    Delete
-                </button>
-            </Space>
-        ),
-    },
-];
+import SoftBox from "components/SoftBox";
+import SoftTypography from "components/SoftTypography";
+import { useDispatch, useSelector } from "react-redux";
+
+import { columns } from "./data/user_columns";
+import { withPromiseAndDispatch } from "helpers";
+import { getListUsersAsync } from "redux/users/users.action";
+
 const data = [
     {
         key: "1",
-        name: "John Brown",
+        uid: 1,
+        full_name: "John Brown",
+        email: "johnBrown@gmail.com",
         age: 32,
         address: "New York No. 1 Lake Park",
-        tags: ["nice", "developer"],
+        roles: ["nice", "developer"],
     },
     {
         key: "2",
-        name: "Jim Green",
+        uid: 2,
+        full_name: "Jim Green",
+        email: "jimgreen@gmail.com",
         age: 42,
         address: "London No. 1 Lake Park",
-        tags: ["loser"],
+        roles: ["loser"],
     },
     {
         key: "3",
-        name: "Joe Black",
+        full_name: "Joe Black",
+        email: "joeblack@gmail.com",
         age: 32,
         address: "Sydney No. 1 Lake Park",
-        tags: ["cool", "teacher"],
+        roles: ["cool", "teacher"],
     },
 ];
+
+const reformatDataTable = (user) => ({
+    key: "1",
+    uid: 1,
+    full_name: "John Brown",
+    email: "johnBrown@gmail.com",
+    age: 32,
+    address: "New York No. 1 Lake Park",
+    roles: ["nice", "developer"],
+});
+
 const UserPage = () => {
+    const dispatch = useDispatch();
+    
+    const listUsers = useSelector((state) => {
+        return state.usersReducer.list;
+    });
+    
+    const _getListUsersAsync = useCallback(
+        (ctx) => withPromiseAndDispatch(getListUsersAsync, ctx, dispatch),
+        [dispatch]
+    );
+    
+    React.useEffect(() => {
+        _getListUsersAsync();
+        return () => {}
+        
+    }, [])
+    
+    // Handle add new account
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    
+    const showModalCreateAccount = async () => {
+        setIsModalOpen(true);
+    };
+    const handleOkModalCreateAccount = () => {
+        setIsModalOpen(false);
+    };
+    const handleCancelModalCreateAccount = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <>
-            <Table columns={columns} dataSource={data} />
+            <Card style={{ top: 120 }}>
+                <SoftBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
+                    <SoftTypography variant="h6">User table</SoftTypography>
+                    <Button type="primary" onClick={showModalCreateAccount}>
+                        Add User
+                    </Button>
+                    <Modal
+                        title="Create New User"
+                        open={isModalOpen}
+                        onOk={handleOkModalCreateAccount}
+                        onCancel={handleCancelModalCreateAccount}
+                    >
+                        alo
+                    </Modal>
+                </SoftBox>
+                <SoftBox
+                    sx={{
+                        "& .MuiTableRow-root:not(:last-child)": {
+                            "& td": {
+                                borderBottom: ({ borders: { borderWidth, borderColor } }) =>
+                                    `${borderWidth[1]} solid ${borderColor}`,
+                            },
+                        },
+                    }}
+                >
+                    <Table columns={columns} dataSource={data} />
+                </SoftBox>
+            </Card>
         </>
     );
 };
