@@ -113,7 +113,7 @@ const UserPage = () => {
             email: user.email,
             fullname: user.fullname,
             avatar: user.avatar,
-            dob: user.dob.slice(0, 10),
+            dob: user.dob, //.slice(0, 10),
             created_time: user.created_time,
             roles: user.role_ids.map((role_id) => getRoleNameById(role_id, userRoles)),
         }));
@@ -473,7 +473,12 @@ const UserPage = () => {
                         </Col>
                         <Col>
                             <Form.Item name="dob">
-                                <Input />
+                                {/* <DatePicker
+                                id="dob_date"
+                                format={dateFormat}
+                                // defaultValue={dayjs('', dateFormat)}
+                                onChange={onSelectDob} /> */}
+                                <Input/>
                             </Form.Item>
                         </Col>
                     </Row>

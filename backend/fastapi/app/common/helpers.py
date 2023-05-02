@@ -1,4 +1,4 @@
-
+from datetime import datetime
 def getRoleNameById(all_roles, role_id):
     pass
 
@@ -24,7 +24,7 @@ def parseUserFromDB(user):
         "email": user.email,
         "fullname": user.fullname,
         "avatar": user.avatar,
-        "dob": user.dob,
+        "dob": datetime.strftime(user.dob, "%d-%m-%Y"),
         "created_time": user.created_time,
         "role_ids": [role.role_id for role in user.roles],
     }
