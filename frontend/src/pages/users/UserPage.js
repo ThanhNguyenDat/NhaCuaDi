@@ -75,6 +75,9 @@ const UserPage = () => {
     const [imageUploadUrl, setImageUploadUrl] = React.useState("");
     const [loadingUpload, setLoadingUpload] = React.useState(false);
 
+    const [isModalEditUserOpen, setIsModalEditUserOpen] = useState(false);
+    const [isModalCreateUserOpen, setIsModalCreateUserOpen] = useState(false);
+
     const [dob, setDob] = React.useState("");
 
     const [optionUserRoles, setOptionUserRoles] = React.useState([]);
@@ -188,6 +191,8 @@ const UserPage = () => {
     const handleDeleteAccount = (record) => {
         // call api
 
+        _getListUsersAsync();
+        // Call api xong => delete code below
         // update UI
         const newDataTable = [...dataTable];
         const id = newDataTable.findIndex((item) => item.uid === record.uid);
@@ -197,8 +202,6 @@ const UserPage = () => {
     };
 
     // Handle Modal for Edit User
-    const [isModalEditUserOpen, setIsModalEditUserOpen] = useState(false);
-
     const showModalEditUser = async () => {
         setIsModalEditUserOpen(true);
     };
@@ -214,8 +217,6 @@ const UserPage = () => {
     };
 
     // Handle Modal for Create User
-    const [isModalCreateUserOpen, setIsModalCreateUserOpen] = useState(false);
-
     const showModalCreateUser = async () => {
         setIsModalCreateUserOpen(true);
     };
