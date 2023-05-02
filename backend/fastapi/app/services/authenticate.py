@@ -45,8 +45,11 @@ def add_new_user(username, password, email, fullname, avatar, dob):
     session = DBSession()
 
     password_hashed = pwd_context.hash(password)
-    dob = datetime.strptime(dob, "%d/%m/%Y").date()
-
+    if dob:
+        dob = datetime.strptime(dob, "%d-%m-%Y").date()
+    else:
+        dob = "01-01-1945"
+    
     user = Users(username=username, password=password_hashed, email=email, fullname=fullname, avatar=avatar, dob=dob)
     session.add(user)
     session.commit()

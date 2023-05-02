@@ -2,30 +2,33 @@ import { Link } from "react-router-dom";
 import { Button, Space, Tag } from "antd";
 
 import { Author } from "./authorsTableData";
-const thanhNe =
-    "https://scontent.fsgn9-1.fna.fbcdn.net/v/t39.30808-6/272858595_1763530754038181_7657492639481153746_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=TCPyawhzy6gAX9Pn8yw&_nc_ht=scontent.fsgn9-1.fna&oh=00_AfC3DgDr-NxL57yxlS3QRy1kwNDjjQlb6JA_euRxQvXZPA&oe=64548B82";
+import no_image_male from "assets/images/no_image_male.jpg";
+
 export const columns = [
     {
         title: "Full Name",
-        dataIndex: "full_name",
-        key: "full_name",
-        // render: (text) => <a>{text}</a>,
+        dataIndex: "fullname",
+        key: "fullname",
         render: (_, record) => (
             <Link to={`/user/detail?uid=${record.uid}`}>
-                <Author image={thanhNe} name={record.full_name} email={record.email} />
+                <Author
+                    image={record.avatar || no_image_male}
+                    name={record.fullname}
+                    email={record.email}
+                />
             </Link>
         ),
     },
     {
-        title: "Age",
-        dataIndex: "age",
-        key: "age",
+        title: "Dob",
+        dataIndex: "dob",
+        key: "dob",
     },
     {
         title: "Role",
         dataIndex: "role",
         key: "role",
-        render: (_, { roles }) => roles.map((role) => <Tag color="blue">{role}</Tag>),
+        render: (_, { roles }) => roles?.map((role) => <Tag color="blue">{role}</Tag>),
     },
 
     {

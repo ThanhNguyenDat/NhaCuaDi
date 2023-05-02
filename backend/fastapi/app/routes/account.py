@@ -94,7 +94,6 @@ async def get_all_roles(
 
     return response
 
-
 @router.post("/add-account")
 async def add_account(
     current_user: Annotated[UserSchema, Depends(admin_permission)],
@@ -111,6 +110,8 @@ async def add_account(
 
     role_names = req_json.get("roles", ["guest"]) # role is role_ids
     
+
+    print("req_json: ", req_json)
     if isinstance(role_names, str):
         role_names = [role_names]
         
@@ -145,6 +146,12 @@ async def add_account(
     response = JSONResponse(content=content)
     return response
 
+@router.delete("/delete/{id}")
+async def delete_account(
+    current_user: Annotated[UserSchema, Depends(admin_permission)],
+    request: Request
+):
+    pass
 
 @router.put("/update-user-role")
 async def update_user_role(

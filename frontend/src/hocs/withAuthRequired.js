@@ -75,7 +75,6 @@ function AuthComponent(props) {
         try {
             const user = await getLoginInfo({});
             const userRoles = await getRoles({}); //
-            console.log("here?");
             const isPermissionAccess = checkUserPermission(user, userRoles, roles);
             // check here ! optimize here => code dang bi ngu
             if (!isPermissionAccess) {

@@ -26,3 +26,7 @@ export const changePassword = (data) => {
 export const getListUsers = () => {
     return APIUtils.get(`${baseURL}/api/users/get-list-users`);
 };
+
+export const addNewUser = (data) => {
+    return APIUtils.post(`${baseURL}/api/account/add-account`, data);
+};

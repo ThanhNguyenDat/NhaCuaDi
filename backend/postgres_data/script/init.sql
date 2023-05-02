@@ -55,21 +55,22 @@ CREATE TABLE "lessons" (
 INSERT INTO "users" (
     username,
     password,
-    email
-) VALUES ('admin', 'admin', 'admin@gmail.com'),
-        ('student', '$2b$12$mKiyafcRqa6wFg3N6/YQJOuoVbEyGAZB0gDQ5Tbac9meAF11ZTZ5q', 'student@gmail.com'),
-        ('guest', '$2b$12$B37dlhMQMbLVpk/IUMpdluN5lNTEqNz5yilOGfB2zmZ5rPhQ0dggC', 'guest@gmail.com');
+    email,
+    fullname
+) VALUES ('admin', 'admin', 'admin@gmail.com', 'Admin'),
+        ('student', '$2b$12$mKiyafcRqa6wFg3N6/YQJOuoVbEyGAZB0gDQ5Tbac9meAF11ZTZ5q', 'student@gmail.com','Student'),
+        ('guest', '$2b$12$B37dlhMQMbLVpk/IUMpdluN5lNTEqNz5yilOGfB2zmZ5rPhQ0dggC', 'guest@gmail.com', 'Guest');
 
 
 INSERT INTO "roles" (
     name,
     description
 ) VALUES ('admin', 'admin description'),
-        ('assitance', 'assitance description'),
+        ('assistant', 'assistant description'),
         ('develop', 'develop description'),
         ('content', 'content description'),
         ('data science', 'data science description'),
-        ('data_analysis', 'data analysis description'),
+        ('data analysis', 'data analysis description'),
         ('student', 'student description');
 
 
@@ -77,6 +78,6 @@ INSERT INTO "user_role" (
     user_id,
     role_id
 ) VALUES (1, 1),
-        (1, 2),
+        (2, 2),
         (2, 7);
 
