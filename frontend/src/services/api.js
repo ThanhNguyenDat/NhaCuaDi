@@ -36,5 +36,5 @@ export const deleteUser = (uid) => {
 };
 
 export const editUser = (data) => {
-    return APIUtils.put(`${baseURL}/api/account/edit-account`, data)
-}
+    return APIUtils.put(`${baseURL}/api/account/edit-account`, data);
+};

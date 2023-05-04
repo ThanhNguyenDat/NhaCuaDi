@@ -4,7 +4,12 @@ import { takeLatest, call, put } from "redux-saga/effects";
 import { getListUsers, addNewUser, editUser } from "services/api";
 
 import { callbackSuccess, callbackError } from "redux/helpers";
-import { ADD_NEW_USER_ASYNC, DELETE_USER_ASYNC, EDIT_USER_ASYNC, GET_LIST_USERS_ASYNC } from "./users.action";
+import {
+    ADD_NEW_USER_ASYNC,
+    DELETE_USER_ASYNC,
+    EDIT_USER_ASYNC,
+    GET_LIST_USERS_ASYNC,
+} from "./users.action";
 import { deleteUser } from "services/api";
 
 function* handleGetListUsers({ ctx }) {
@@ -48,12 +53,12 @@ function* handleDeleteUser({ ctx }) {
     }
 }
 
-function* handleEditUser({ctx}) {
+function* handleEditUser({ ctx }) {
     try {
         yield put({ type: EDIT_USER_ASYNC.START });
-        const result = yield call(editUser, {...ctx});
-        yield put({type: EDIT_USER_ASYNC.SUCCESS});
-        callbackSuccess(ctx, result)
+        const result = yield call(editUser, { ...ctx });
+        yield put({ type: EDIT_USER_ASYNC.SUCCESS });
+        callbackSuccess(ctx, result);
     } catch (err) {
         console.log(err);
         yield put({ type: ADD_NEW_USER_ASYNC.FAIL, error: err });

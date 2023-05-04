@@ -6,6 +6,7 @@ import AuthComponent from "hocs/withAuthRequired";
 
 import AppLayout from "./layouts/AppLayout";
 import UserPage from "./pages/users/UserPage";
+import LessonPage from "pages/lessons/LessonPage";
 
 const LoginPage = lazy(() => import("./pages/login"));
 const Notfound = lazy(() => import("./pages/notfound"));
@@ -76,7 +77,7 @@ const routes = [
             {
                 path: "/lessons",
                 name: "Lessons",
-                element: <UserPage />,
+                element: <LessonPage />,
             },
         ],
     },

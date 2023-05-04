@@ -187,7 +187,7 @@ const UserPage = () => {
                         placement="top"
                         title="Are you sure to delete this user?"
                         description={`Delete ${record.fullname}`}
-                        onConfirm={()=>{
+                        onConfirm={() => {
                             handleDeleteAccount(record);
                             message.info("Delete success");
                         }}
@@ -231,7 +231,7 @@ const UserPage = () => {
             formUser.resetFields();
             _getListUsersAsync();
         } catch (err) {
-            console.log("erro", err)
+            console.log("erro", err);
         }
     };
     const handleCancelModalEditUser = () => {
@@ -256,7 +256,7 @@ const UserPage = () => {
             // api for create user
             const result = await _addNewUser(formValues);
         } catch (err) {
-            console.log('error: ', err);
+            console.log("error: ", err);
         }
         formUser.resetFields();
         _getListUsersAsync();
@@ -427,7 +427,7 @@ const UserPage = () => {
                                                     format={dateFormat}
                                                     onChange={onSelectDob}
                                                 /> */}
-                                                <Input placeholder="01-01-1945"/>
+                                                <Input placeholder="01-01-1945" />
                                             </Form.Item>
                                         </Col>
                                     </Row>
@@ -480,7 +480,7 @@ const UserPage = () => {
                         </Col>
                         <Col>
                             <Form.Item name="uid">
-                                <Input disabled/>
+                                <Input disabled />
                             </Form.Item>
                         </Col>
                     </Row>
@@ -504,7 +504,7 @@ const UserPage = () => {
                             </Form.Item>
                         </Col>
                     </Row>
-                    
+
                     <Row>
                         <Col>
                             <Label>Full Name</Label>
@@ -527,7 +527,7 @@ const UserPage = () => {
                                     defaultValue={dayjs('', dateFormat)}
                                     onChange={onSelectDob} 
                                 /> */}
-                                <Input placeholder="01-01-1945"/>
+                                <Input placeholder="01-01-1945" />
                             </Form.Item>
                         </Col>
                     </Row>

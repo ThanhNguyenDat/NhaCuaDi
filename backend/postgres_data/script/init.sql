@@ -7,6 +7,7 @@ CREATE TABLE "users" (
     fullname VARCHAR DEFAULT '',
     avatar VARCHAR DEFAULT '',
     dob TIMESTAMP DEFAULT '1945-01-01',
+    last_active TIMESTAMP DEFAULT NOW(),
     created_time TIMESTAMP DEFAULT NOW()
 );
 
@@ -18,7 +19,6 @@ CREATE TABLE "roles" (
     description VARCHAR(255)
 );
 
-
 CREATE TABLE "user_role" (
     id SERIAL PRIMARY KEY,
     -- user_id INTEGER REFERENCES "user"(id),
@@ -29,7 +29,7 @@ CREATE TABLE "user_role" (
     CONSTRAINT "fk_user_role_roles_id" FOREIGN KEY ("role_id") REFERENCES "roles" ("id")
 );
 
-CREATE TABLE "session_login" (
+CREATE TABLE "login_sessions" (
     -- n:1 "users"
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL,
@@ -43,12 +43,39 @@ CREATE TABLE "session_login" (
 -- Table For Lessons
 CREATE TABLE "lessons" (
     id SERIAL PRIMARY KEY,
-    title VARCHAR,
-    description VARCHAR,
-    audio_link VARCHAR,
+    lesson_name VARCHAR, 
+    audio_url VARCHAR,
+    image_url VARCHAR,
+    lesson_type VARCHAR,
+    question_type VARCHAR,
+    content VARCHAR,
+    solution VARCHAR,
+    transcript VARCHAR,
+    explanation VARCHAR,
+    done_count INTEGER,
+    collection_id INTEGER,
     create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_at TIMESTAMP
+    updated_at TIMESTAMP
 );
+
+CREATE TABLE "lesson_sessions" (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER,
+
+);
+
+CREATE TABLE "classes" (
+
+);
+
+
+
+
+
+
+
+
+
 
 
 -- Inser data

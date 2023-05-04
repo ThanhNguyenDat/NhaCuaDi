@@ -14,4 +14,4 @@ export const addNewUserAsync = (ctx) => ({ type: ADD_NEW_USER_ASYNC.HANDLER, ctx
 
 export const deleteUserAsync = (ctx) => ({ type: DELETE_USER_ASYNC.HANDLER, ctx });
 
-export const editUserAsync = (ctx) => ({ type: EDIT_USER_ASYNC.HANDLER, ctx })
+export const editUserAsync = (ctx) => ({ type: EDIT_USER_ASYNC.HANDLER, ctx });
