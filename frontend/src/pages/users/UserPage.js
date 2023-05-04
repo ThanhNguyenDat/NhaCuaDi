@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Card from "@mui/material/Card";
 import TableContainer from "@mui/material/TableContainer";
-import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
+// import dayjs from "dayjs";
+// import customParseFormat from "dayjs/plugin/customParseFormat";
 
 import {
     Button,
@@ -39,10 +39,11 @@ import no_image_male from "assets/images/no_image_male.jpg";
 import { Col, Label, Row } from "reactstrap";
 import { role_colors } from "constants/color/roles";
 import { addNewUserAsync } from "redux/users/users.action";
-import { signInAsync } from "redux/auth/authActions";
-import { deleteUserAsync } from "redux/users/users.action";
 
-dayjs.extend(customParseFormat);
+import { deleteUserAsync } from "redux/users/users.action";
+import { editUserAsync } from "redux/users/users.action";
+
+// dayjs.extend(customParseFormat);
 const dateFormat = "DD-MM-YYYY";
 
 const tagRender = (props) => {
@@ -101,6 +102,10 @@ const UserPage = () => {
     );
     const _deleteUser = useCallback(
         (ctx) => withPromiseAndDispatch(deleteUserAsync, ctx, dispatch),
+        [dispatch]
+    );
+    const _editUser = useCallback(
+        (ctx) => withPromiseAndDispatch(editUserAsync, ctx, dispatch),
         [dispatch]
     );
 
@@ -217,11 +222,17 @@ const UserPage = () => {
     const showModalEditUser = async () => {
         setIsModalEditUserOpen(true);
     };
-    const handleOkModalEditUser = () => {
-        setIsModalEditUserOpen(false);
-        // api edit user
-
-        formUser.resetFields();
+    const handleOkModalEditUser = async () => {
+        try {
+            setIsModalEditUserOpen(false);
+            // api edit user
+            const formValues = formUser.getFieldsValue();
+            const result = await _editUser(formValues);
+            formUser.resetFields();
+            _getListUsersAsync();
+        } catch (err) {
+            console.log("erro", err)
+        }
     };
     const handleCancelModalEditUser = () => {
         setIsModalEditUserOpen(false);
@@ -241,9 +252,12 @@ const UserPage = () => {
             }
         });
         formValues["dob"] = dob;
-
-        // api for create user
-        const result = await _addNewUser(formValues);
+        try {
+            // api for create user
+            const result = await _addNewUser(formValues);
+        } catch (err) {
+            console.log('error: ', err);
+        }
         formUser.resetFields();
         _getListUsersAsync();
     };
@@ -288,6 +302,7 @@ const UserPage = () => {
             });
         }
     };
+
     const uploadButton = (
         <div>
             {loadingUpload ? <LoadingOutlined /> : <PlusOutlined />}
@@ -407,11 +422,12 @@ const UserPage = () => {
                                         </Col>
                                         <Col>
                                             <Form.Item name="dob">
-                                                <DatePicker
+                                                {/* <DatePicker
                                                     id="dob_date"
                                                     format={dateFormat}
                                                     onChange={onSelectDob}
-                                                />
+                                                /> */}
+                                                <Input placeholder="01-01-1945"/>
                                             </Form.Item>
                                         </Col>
                                     </Row>
@@ -460,6 +476,16 @@ const UserPage = () => {
                 <Form form={formUser}>
                     <Row>
                         <Col>
+                            <Label>User ID</Label>
+                        </Col>
+                        <Col>
+                            <Form.Item name="uid">
+                                <Input disabled/>
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
                             <Label>Username</Label>
                         </Col>
                         <Col>
@@ -468,7 +494,17 @@ const UserPage = () => {
                             </Form.Item>
                         </Col>
                     </Row>
-
+                    <Row>
+                        <Col>
+                            <Label>Email</Label>
+                        </Col>
+                        <Col>
+                            <Form.Item name="email">
+                                <Input />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    
                     <Row>
                         <Col>
                             <Label>Full Name</Label>
@@ -486,11 +522,12 @@ const UserPage = () => {
                         <Col>
                             <Form.Item name="dob">
                                 {/* <DatePicker
-                                id="dob_date"
-                                format={dateFormat}
-                                // defaultValue={dayjs('', dateFormat)}
-                                onChange={onSelectDob} /> */}
-                                <Input />
+                                    id="dob_date"
+                                    format={dateFormat}
+                                    defaultValue={dayjs('', dateFormat)}
+                                    onChange={onSelectDob} 
+                                /> */}
+                                <Input placeholder="01-01-1945"/>
                             </Form.Item>
                         </Col>
                     </Row>

@@ -1,5 +1,5 @@
 from datetime import datetime
-def getRoleNameById(all_roles, role_id):
+def getRoleIdByName(all_roles, role_name):
     pass
 
 

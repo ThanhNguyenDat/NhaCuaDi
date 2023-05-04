@@ -9,7 +9,7 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 
 from typing_extensions import Annotated
-from sqlalchemy.sql import text, delete
+from sqlalchemy.sql import text, delete, update
 
 from ..models.accountModel import Users, Roles, UserRole
 from ..schemas.accountSchema import TokenData
@@ -76,6 +76,41 @@ def delete_user(uid):
     session.commit()
     session.close()
     return True
+
+def edit_user(id, username, email, fullname, avatar, dob, roles ):
+    session = DBSession()
+    user = session.query(Users).filter_by(id=id).first()
+
+    user.username = username
+    user.email = email
+    user.fullname = fullname
+    user.avatar = avatar
+    user.dob = dob
+    session.commit()
+
+
+    # edit roles
+    old_roles = session.query(UserRole).filter(UserRole.user_id==id)
+    old_roles.delete()
+    
+    for role_name in roles:
+        role = get_role(role_name)
+
+        if not role:
+            raise RoleNotExistException
+
+        add_user_role(user_id=id, role_id=role.id)
+    
+    # user_role = session.query(UserRole).filter(UserRole.user_id==id, UserRole.role_id.in_(old_role_ids))
+
+    # user_role.update({UserRole.role_id: new_role_ids}, synchronize_session=False)
+    
+    session.commit()
+    
+    # add_user_role(new_user.id, role_id)
+    session.close()
+    return user
+    
 
 def get_roles():
     session = DBSession()

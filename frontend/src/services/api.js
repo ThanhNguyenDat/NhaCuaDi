@@ -34,3 +34,7 @@ export const addNewUser = (data) => {
 export const deleteUser = (uid) => {
     return APIUtils._delete(`${baseURL}/api/account/delete-account/${uid}`);
 };
+
+export const editUser = (data) => {
+    return APIUtils.put(`${baseURL}/api/account/edit-account`, data)
+}

@@ -123,7 +123,7 @@ async def add_account(
     avatar = req_json.get("avatar", "")
     dob = req_json.get('dob', "")
 
-    role_names = req_json.get("roles", ["guest"]) # role is role_ids
+    role_names = req_json.get("roles", "") # role is role_ids
     
 
     print("req_json: ", req_json)
@@ -173,10 +173,43 @@ async def delete_account(
         "data": status,
         "error_code": 0,
         "message": "Delete successfully"
-
     }
+
     response = JSONResponse(content=content)
     return response
+
+@router.put("/edit-account")
+async def edit_account(
+    current_user: Annotated[UserSchema, Depends(admin_permission)],
+    request: Request
+):
+    req_json = await request.json()
+    print("req_json: ", req_json)
+
+    id = req_json.get("uid")
+    if not id:
+        raise "ID not null"
+    
+    username = req_json.get("username", "")
+    email = req_json.get("email", "")
+    fullname = req_json.get("fullname", "")
+    avatar = req_json.get("avatar", "")
+    dob = req_json.get("dob", "")
+    roles = req_json.get("roles", "")
+
+    _users = edit_user(id, username, email, fullname, avatar, dob, roles)
+    # print(_users)
+
+
+    content = {
+        "data": req_json,
+        "error_code": 0,
+        "message": "Delete successfully"
+    }
+
+    response = JSONResponse(content=content)
+    return response
+    
 
 @router.put("/update-user-role")
 async def update_user_role(

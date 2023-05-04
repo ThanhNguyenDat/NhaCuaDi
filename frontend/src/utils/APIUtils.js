@@ -66,4 +66,14 @@ export const _delete = async (path, data = {}) => {
     return responseHandler(response.data);
 };
 
+export const put = async (path, data = {}) => {
+    const response = await APIUtils.put(path, data);
+    return responseHandler(response.data);
+};
+
+export const patch = async (path, data = {}) => {
+    const response = await APIUtils.patch(path, data);
+    return responseHandler(response.data);
+};
+
 export default APIUtils;
