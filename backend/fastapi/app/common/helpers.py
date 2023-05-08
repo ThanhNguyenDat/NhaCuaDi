@@ -24,7 +24,7 @@ def parseUserFromDB(user):
         "email": user.email,
         "fullname": user.fullname,
         "avatar": user.avatar,
-        "dob": datetime.strftime(user.dob, "%d-%m-%Y"),
+        "dob": datetime.strftime(user.dob, "%d-%m-%Y") if user.dob else "",
         "created_time": user.created_time,
         "role_ids": [role.role_id for role in user.roles],
     }

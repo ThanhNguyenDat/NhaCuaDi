@@ -7,6 +7,7 @@ import AuthComponent from "hocs/withAuthRequired";
 import AppLayout from "./layouts/AppLayout";
 import UserPage from "./pages/users/UserPage";
 import LessonPage from "pages/lessons/LessonPage";
+import CreateLessonPage from "pages/lessons/CreateLessonPage";
 
 const LoginPage = lazy(() => import("./pages/login"));
 const Notfound = lazy(() => import("./pages/notfound"));
@@ -37,7 +38,8 @@ const routes = [
     {
         path: "/category",
         name: "Bai Viet",
-        // element: <AppLayout />,
+
+        element: <AppLayout />,
         children: [
             {
                 path: "/category",
@@ -69,15 +71,21 @@ const routes = [
             },
         ],
     },
+
     {
         path: "/lessons",
         name: "Lessons",
-        element: <AppLayout />,
+        // element: <AppLayout />,
         children: [
             {
                 path: "/lessons",
                 name: "Lessons",
                 element: <LessonPage />,
+            },
+            {
+                path: "/lessons/add",
+                name: "Create new lesson",
+                element: <CreateLessonPage />,
             },
         ],
     },

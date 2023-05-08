@@ -54,39 +54,32 @@ CREATE TABLE "lessons" (
     explanation VARCHAR,
     done_count INTEGER,
     collection_id INTEGER,
-    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP
+    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE "lesson_sessions" (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER,
-
+    user_id INTEGER
 );
 
 CREATE TABLE "classes" (
-
+    id SERIAL PRIMARY KEY
 );
 
-
-
-
-
-
-
-
-
-
-
 -- Inser data
-INSERT INTO "users" (
-    username,
-    password,
-    email,
-    fullname
-) VALUES ('admin', 'admin', 'admin@gmail.com', 'Admin'),
-        ('student', '$2b$12$mKiyafcRqa6wFg3N6/YQJOuoVbEyGAZB0gDQ5Tbac9meAF11ZTZ5q', 'student@gmail.com','Student'),
-        ('guest', '$2b$12$B37dlhMQMbLVpk/IUMpdluN5lNTEqNz5yilOGfB2zmZ5rPhQ0dggC', 'guest@gmail.com', 'Guest');
+-- INSERT INTO "users" (
+--     username,
+--     password,
+--     email,
+--     fullname
+-- ) VALUES ('admin', 'admin', 'admin@gmail.com', 'Admin'),
+--         ('student', '$2b$12$mKiyafcRqa6wFg3N6/YQJOuoVbEyGAZB0gDQ5Tbac9meAF11ZTZ5q', 'student@gmail.com','Student'),
+--         ('guest', '$2b$12$B37dlhMQMbLVpk/IUMpdluN5lNTEqNz5yilOGfB2zmZ5rPhQ0dggC', 'guest@gmail.com', 'Guest');
+
+COPY "users"
+FROM '/tmp/dump/users.csv'
+DELIMITER ','
+CSV HEADER;
 
 
 INSERT INTO "roles" (
@@ -107,4 +100,6 @@ INSERT INTO "user_role" (
 ) VALUES (1, 1),
         (2, 2),
         (2, 7);
+
+
 

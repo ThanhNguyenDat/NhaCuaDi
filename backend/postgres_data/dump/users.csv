@@ -1,0 +1,4 @@
+id,username,password,email,fullname,avatar,dob,last_activate,create_time
+1,admin,admin,admin@gmail.com,Admin,/data/images/avatars/no_image_female.jpg,,,
+2,student,$2b$12$mKiyafcRqa6wFg3N6/YQJOuoVbEyGAZB0gDQ5Tbac9meAF11ZTZ5q,student@gmail.com,Student,/data/images/avatars/no_image_female.jpg,,,
+3,guest,$2b$12$B37dlhMQMbLVpk/IUMpdluN5lNTEqNz5yilOGfB2zmZ5rPhQ0dggC,guest@gmail.com,Guest,,,,

@@ -1,13 +1,14 @@
-# Nha Cua Di backend
+# Backend NhaCuaDi
 
+-   Config:
 
-- Config:
-  - Database:
-    - username: postgres
-    - password: postgres
-    - database: nhacuadi
-    - host: localhost
-    - port: 6000
+    -   Database:
 
-  - Fastapi:
-    - port: 6001
+        -   username: postgres
+        -   password: postgres
+        -   database: nhacuadi
+        -   host: localhost
+        -   port: 6000
+
+    -   Fastapi:
+        -   port: 6001
