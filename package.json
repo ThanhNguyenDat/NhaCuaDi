@@ -1,0 +1,22 @@
+{
+    "scripts": {
+        "prettify": "prettier --write ."
+    },
+    "name": "nhacuadi",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ThanhNguyenDat/NhaCuaDi.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ThanhNguyenDat/NhaCuaDi/issues"
+    },
+    "homepage": "https://github.com/ThanhNguyenDat/NhaCuaDi#readme",
+    "description": "",
+    "devDependencies": {
+        "prettier": "^2.8.8"
+    }
+}
