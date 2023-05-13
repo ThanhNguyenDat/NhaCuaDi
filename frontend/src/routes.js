@@ -8,6 +8,7 @@ import AppLayout from "./layouts/AppLayout";
 import UserPage from "./pages/users/UserPage";
 import LessonPage from "pages/lessons/LessonPage";
 import CreateLessonPage from "pages/lessons/CreateLessonPage";
+import LessonDetail from "pages/lessons/LessonDetail";
 
 const LoginPage = lazy(() => import("./pages/login"));
 const Notfound = lazy(() => import("./pages/notfound"));
@@ -86,6 +87,11 @@ const routes = [
                 path: "/lessons/add",
                 name: "Create new lesson",
                 element: <CreateLessonPage />,
+            },
+            {
+                path: "/lessons/detail",
+                name: "Create new lesson",
+                element: <LessonDetail />,
             },
         ],
     },

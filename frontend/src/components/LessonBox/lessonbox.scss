@@ -1,0 +1,38 @@
+.card {
+    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    border-radius: 10px;
+    max-width: 300px;
+
+    min-height: 300px;
+    .card-img-top {
+    }
+    .card-body {
+        display: flex;
+        flex-direction: column;
+
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .card-information {
+            display: flex;
+            // justify-content: space-between;
+            align-items: center;
+            padding: 3px;
+            gap: 3px;
+            .card-dot,
+            .card-turns,
+            .card-number-tests {
+                color: rgb(160, 160, 160);
+                font-size: 16px;
+            }
+            .card-dot {
+                padding: 0 10px;
+            }
+        }
+
+        .card-link {
+            color: red;
+        }
+    }
+}

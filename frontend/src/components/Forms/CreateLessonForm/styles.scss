@@ -1,0 +1,71 @@
+// root form steps
+
+.create-lesson-form {
+    height: 100%;
+
+    .step-control {
+        margin-top: "24px";
+        margin-bottom: "24px";
+    }
+
+    .step-content {
+        height: 100%;
+    }
+}
+
+// second step
+.form-second-step {
+    display: flex;
+    flex: 2;
+    padding: 10px;
+    gap: 20px;
+    .flex {
+        display: flex;
+        justify-content: first baseline;
+        flex: 2;
+        padding: 10px;
+        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+        border-radius: 10px;
+        min-height: 500px;
+        min-width: 40%;
+        background-color: white;
+        .left,
+        .right {
+            display: flex;
+            flex-direction: column;
+
+            .title {
+                font-size: 20px;
+                font-weight: bold;
+                color: rgb(160, 160, 160);
+            }
+        }
+        .left {
+            flex-basis: 19%;
+        }
+        .right {
+            flex-basis: 79%;
+            .solution-item {
+                display: flex;
+                margin: 10px;
+
+                min-width: 100%;
+                max-width: 100%;
+                padding: 10px;
+                .solution-index {
+                    padding-right: 10px;
+                }
+                .solution-input {
+                    padding-right: 10px;
+                    width: 90%;
+                }
+                .delete-icon {
+                    color: red;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}

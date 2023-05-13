@@ -1,0 +1,15 @@
+version: "3"
+services:
+    frontend:
+        stdin_open: true
+        tty: true
+        container_name: frontend-react-nhacuadi
+        build:
+            context: .
+            dockerfile: Dockerfile
+        env_file: .env
+        ports:
+            - "8000:3000"
+        volumes:
+            - ./:/app
+        command: npm run start

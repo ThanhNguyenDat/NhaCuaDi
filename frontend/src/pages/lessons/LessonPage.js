@@ -15,16 +15,15 @@ const LessonPage = (props) => {
                             image={no_image_female}
                             title="title"
                             description="description"
-                            url="#"
+                            url="/lessons/detail?lesson_id=1"
                         />
                     </div>
-                    {/* End Loop */}
                     <div className="col">
                         <LessonBox
                             image={no_image_female}
                             title="title"
                             description="description"
-                            url="#"
+                            url="/lessons/detail?lesson_id=2"
                         />
                     </div>
                 </div>
