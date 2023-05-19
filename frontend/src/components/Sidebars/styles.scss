@@ -1,0 +1,8 @@
+.menu-item {
+    padding: "5px 35px 5px 20px !important";
+    .ps-menu-button {
+        &.ps-active {
+            color: #6870fa !important;
+        }
+    }
+}

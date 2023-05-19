@@ -1,2 +1,3 @@
-id,leson_name,audio_url,image_url,lesson_type,question_type,content,solution,transcript,explanation,done_count,collection_id,create_at
-1,Ielts 1,auido1.wav,image1.jpg,1,1,1. Câu 1 lesson 1,1. Solution câu 1 lesson 1,,,0,,
+id,leson_name,audio_url,image_url,lesson_type,question_type,content,solution,transcript,explanation,done_count,collection_id,created_at
+1,Ielts 1,auido1.wav,image1.jpg,reading,input,"[ { ""1"": { ""content"": ""content_1"" } }, { ""2"": { ""content"": ""content_2"" } }]","[ { ""1"": { ""solution"": [""sol_1""] } }, { ""2"": { ""solution"": """" } }]","[ { ""1"": { ""transcript"": [""transcript_1""] } }, { ""2"": { ""transcript"": """" } }]",,5,,
+2,Ielts 2,auido2.wav,image2.jpg,listening,select,"[ { ""1"": { ""content"": ""content_1"" } }]","[ { ""1"": { ""solution"": [""sol_1""] } }]","[ { ""1"": { ""transcript"": [""transcript_1""] } }]",,3,,

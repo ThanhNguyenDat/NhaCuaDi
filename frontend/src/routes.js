@@ -1,97 +1,166 @@
 import React, { lazy } from "react";
-import { Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import Icon from "@mui/material/Icon";
+import WaitingComponent from "hocs/WaitingComponents";
 import AuthComponent from "hocs/withAuthRequired";
 
+// layout
 import AppLayout from "./layouts/AppLayout";
-import UserPage from "./pages/users/UserPage";
-import LessonPage from "pages/lessons/LessonPage";
-import CreateLessonPage from "pages/lessons/CreateLessonPage";
-import LessonDetail from "pages/lessons/LessonDetail";
+import UserLayout from "layouts/UserLayout";
+import Introduction from "components/Introduction";
+
+import config from "config";
+
+// user pages
+import ProfilePage from "pages/user/ProfilePage";
+
+// staff pages
+import ManagerStaffPage from "pages/staff/ManagerStaffPage";
+
+// student pages
+import ManagerStudentPage from "pages/student/ManagerStudentPage";
+import Overview from "pages/student/Introduction/Overview";
+import WorkAndEducation from "pages/student/Introduction/WorkAndEducation";
+import LessonStudentPage from "pages/student/LessonStudentPage";
+
+// lesson pages
+import ManagerLessonsPage from "pages/lessons/ManagerLessonsPage";
+import CreateNewLessonPage from "pages/lessons/CreateNewLessonPage";
+import DashboardPage from "pages/user/DashboardPage";
 
 const LoginPage = lazy(() => import("./pages/login"));
 const Notfound = lazy(() => import("./pages/notfound"));
 
-function WaitingComponent({ children, ...props }) {
-    return (
-        <React.Suspense fallback={<div className="loading" />}>
-            {React.Children.map(children, (child) => {
-                return React.cloneElement(child, { ...props });
-            })}
-        </React.Suspense>
-    );
-}
-
-WaitingComponent.propTypes = {
-    children: PropTypes.node.isRequired,
-};
-
 const routes = [
     {
-        path: "/",
+        path: config.routes.home,
         element: (
             <AuthComponent>
-                <AppLayout />
+                <AppLayout>Hi</AppLayout>
             </AuthComponent>
         ),
     },
     {
-        path: "/category",
-        name: "Bai Viet",
-
-        element: <AppLayout />,
-        children: [
-            {
-                path: "/category",
-            },
-            {
-                path: "/category/hoc-tap",
-                name: "Hoc tap",
-                element: <h2>Hoc Tap</h2>,
-            },
-        ],
-    },
-    {
-        path: "/users",
-        name: "Users",
+        path: config.routes.profile,
         element: (
             <AuthComponent>
-                <AppLayout />
+                <AppLayout>
+                    <ProfilePage />
+                </AppLayout>
             </AuthComponent>
         ),
+    },
+    {
+        path: config.routes.dashboard,
+        element: (
+            <AuthComponent>
+                <AppLayout>
+                    <DashboardPage />
+                </AppLayout>
+            </AuthComponent>
+        ),
+    },
+    {
+        path: config.routes.manageStaff,
         children: [
             {
-                path: "/users",
-                name: "User",
+                path: config.routes.manageStaff,
                 element: (
                     <AuthComponent roles={["admin"]}>
-                        <UserPage />
+                        <AppLayout>
+                            <ManagerStaffPage />
+                        </AppLayout>
                     </AuthComponent>
                 ),
             },
         ],
     },
-
     {
-        path: "/lessons",
-        name: "Lessons",
+        path: config.routes.manageStudent,
+        children: [
+            {
+                path: config.routes.manageStudent,
+                element: (
+                    <AuthComponent roles={["admin"]}>
+                        <AppLayout>
+                            <ManagerStudentPage />
+                        </AppLayout>
+                    </AuthComponent>
+                ),
+            },
+            {
+                path: config.routes.aboutOverviewStudent,
+                element: (
+                    <AuthComponent roles={["admin"]}>
+                        <AppLayout>
+                            <UserLayout>
+                                <Introduction>
+                                    <Overview />
+                                </Introduction>
+                            </UserLayout>
+                        </AppLayout>
+                    </AuthComponent>
+                ),
+            },
+            {
+                path: config.routes.aboutWorkAndEducationStudent,
+                element: (
+                    <AuthComponent roles={["admin"]}>
+                        <AppLayout>
+                            <UserLayout>
+                                <Introduction>
+                                    <WorkAndEducation />
+                                </Introduction>
+                            </UserLayout>
+                        </AppLayout>
+                    </AuthComponent>
+                ),
+            },
+            {
+                path: config.routes.aboutLessonsStudent,
+                element: (
+                    <AuthComponent roles={["admin"]}>
+                        <AppLayout>
+                            <UserLayout>
+                                <LessonStudentPage />
+                            </UserLayout>
+                        </AppLayout>
+                    </AuthComponent>
+                ),
+            },
+        ],
+    },
+    {
+        path: config.routes.manageLesson,
+
         // element: <AppLayout />,
         children: [
             {
-                path: "/lessons",
-                name: "Lessons",
-                element: <LessonPage />,
+                path: config.routes.manageLesson,
+                element: (
+                    <AuthComponent roles={["admin"]}>
+                        <AppLayout>
+                            <ManagerLessonsPage />
+                        </AppLayout>
+                    </AuthComponent>
+                ),
             },
             {
-                path: "/lessons/add",
-                name: "Create new lesson",
-                element: <CreateLessonPage />,
+                path: config.routes.createNewLesson,
+                element: (
+                    <AuthComponent roles={["admin"]}>
+                        <AppLayout>
+                            <CreateNewLessonPage />
+                        </AppLayout>
+                    </AuthComponent>
+                ),
             },
             {
-                path: "/lessons/detail",
-                name: "Create new lesson",
-                element: <LessonDetail />,
+                path: "/lessons/:lesson_id",
+                element: (
+                    <AuthComponent roles={["admin"]}>
+                        <AppLayout>Lesson detail</AppLayout>
+                    </AuthComponent>
+                ),
             },
         ],
     },

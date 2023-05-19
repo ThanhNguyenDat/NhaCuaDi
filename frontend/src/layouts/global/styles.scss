@@ -1,0 +1,44 @@
+.sidebar {
+    .ps-sidebar-root {
+        height: 100%;
+        &.ps-collapsed {
+            min-width: 90px;
+        }
+
+        .ps-sidebar-container {
+            height: 100%;
+            .ps-item {
+                background-color: transparent !important;
+            }
+            .top {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-left: 15px;
+            }
+
+            .profile-user {
+                margin-bottom: 25px;
+                .avatar {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .content {
+                    text-align: center;
+                    .name {
+                        margin: 10px 0 0 0;
+                        font-weight: bold;
+                    }
+
+                    .roles {
+                    }
+                }
+            }
+
+            .routes {
+            }
+        }
+    }
+}

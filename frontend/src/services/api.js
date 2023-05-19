@@ -1,7 +1,7 @@
 // const { default: APIUtils } = require('../utils/APIUtils');
 import * as APIUtils from "../utils/APIUtils";
 
-const baseURL = "http://0.0.0.0:6001";
+const baseURL = "http://0.0.0.0:6002";
 
 export const signInRequest = (data) => {
     return APIUtils.post(`${baseURL}/api/account/signin`, data);

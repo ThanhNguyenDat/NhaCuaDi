@@ -54,12 +54,20 @@ CREATE TABLE "lessons" (
     explanation VARCHAR,
     done_count INTEGER,
     collection_id INTEGER,
-    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE "lesson_sessions" (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER
+    user_id INTEGER,
+    lesson_id INTEGER,
+    answer VARCHAR,
+    score float,
+    created_time TIMESTAMP,
+    end_time TIMESTAMP,
+
+    CONSTRAINT "fk_lesson_sessions_lessons_id" FOREIGN KEY ("lesson_id") REFERENCES "lessons" ("id"),
+    CONSTRAINT "fk_lesson_sessions_users_id" FOREIGN KEY ("user_id") REFERENCES "users" ("id")
 );
 
 CREATE TABLE "classes" (
@@ -94,12 +102,24 @@ INSERT INTO "roles" (
         ('student', 'student description');
 
 
-INSERT INTO "user_role" (
-    user_id,
-    role_id
-) VALUES (1, 1),
-        (2, 2),
-        (2, 7);
+-- INSERT INTO "user_role" (
+--     user_id,
+--     role_id
+-- ) VALUES (1, 1),
+--         (2, 2),
+--         (2, 7);
+COPY "user_role"
+FROM '/tmp/dump/user_role.csv'
+DELIMITER ','
+CSV HEADER;
 
 
+COPY "lessons"
+FROM '/tmp/dump/lessons.csv'
+DELIMITER ','
+CSV HEADER;
 
+COPY "lesson_sessions"
+FROM '/tmp/dump/lesson_sessions.csv'
+DELIMITER ','
+CSV HEADER;

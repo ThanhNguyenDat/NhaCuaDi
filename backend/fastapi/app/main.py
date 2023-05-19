@@ -13,7 +13,7 @@ import json
 
 import psycopg2
 
-from .routes import account
+from .routes import account, lessons
 
 # postgresql://postgres:postgres@db:5432/asr_label
 postgres_config = {
@@ -29,7 +29,8 @@ app = FastAPI()
 origins = [
     "http://localhost",
     "http://localhost:3000",
-    "http://localhost:6002",
+    "http://localhost:6000",
+    "http://localhost:6001",
 ]
 
 app.add_middleware(
@@ -47,6 +48,12 @@ app.include_router(
     responses={404: {"description": "Not found"}},
 )
 
+app.include_router(
+    lessons.router,
+    prefix="/api/lessons",
+    tags=["lessons"],
+    responses={404: {"description": "Not found"}},
+)
 
 @app.get("/")
 async def hello():

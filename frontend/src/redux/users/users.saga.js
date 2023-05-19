@@ -1,7 +1,7 @@
 import { takeLatest, call, put } from "redux-saga/effects";
 
 // api
-import { getListUsers, addNewUser, editUser } from "services/api";
+import { getListUsers, addNewUser, editUser, deleteUser } from "services/api";
 
 import { callbackSuccess, callbackError } from "redux/helpers";
 import {
@@ -10,7 +10,6 @@ import {
     EDIT_USER_ASYNC,
     GET_LIST_USERS_ASYNC,
 } from "./users.action";
-import { deleteUser } from "services/api";
 
 function* handleGetListUsers({ ctx }) {
     try {

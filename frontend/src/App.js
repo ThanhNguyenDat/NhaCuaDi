@@ -1,25 +1,29 @@
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.min.js";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import theme from "assets/theme";
+import { ProSidebarProvider } from "react-pro-sidebar";
 
+import { ColorModeContext, useMode } from "theme";
 import routes from "./routes";
+import "./App.css";
 
 const router = createBrowserRouter(routes, {
     basename: "/",
 });
 
 function App() {
+    const [theme, colorMode] = useMode();
+
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <RouterProvider router={router} />
-        </ThemeProvider>
+        <ColorModeContext.Provider value={colorMode}>
+            <ThemeProvider theme={theme}>
+                <ProSidebarProvider>
+                    <CssBaseline />
+                    <RouterProvider router={router} />
+                </ProSidebarProvider>
+            </ThemeProvider>
+        </ColorModeContext.Provider>
     );
 }
 

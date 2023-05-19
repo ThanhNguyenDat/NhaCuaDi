@@ -19,7 +19,6 @@ class Users(Base):
     
     roles = relationship('UserRole', backref='users', lazy='dynamic')
     
-    
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
