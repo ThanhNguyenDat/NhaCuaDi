@@ -1,21 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useParams } from "react-router-dom";
 import { Box, Divider, Typography, useTheme } from "@mui/material";
-import "./styles.scss";
 import { tokens } from "theme";
 import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
 import Item from "components/Sidebars/Item";
 import config from "config";
-import { useParams } from "react-router-dom";
+import "./styles.scss";
 
-const Introduction = ({ children }) => {
+const IntroductionUserLayout = ({ children }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const params = useParams();
     const uid = params.uid || 0;
     return (
         <Box
-            className="introduction"
+            className="introduction-user-layout"
             sx={{
                 // background: colors.grey[900],
                 boxShadow: `0 1px 2px ${colors.grey[200]}`,
@@ -56,6 +56,6 @@ const Introduction = ({ children }) => {
     );
 };
 
-Introduction.propTypes = {};
+IntroductionUserLayout.propTypes = {};
 
-export default Introduction;
+export default IntroductionUserLayout;

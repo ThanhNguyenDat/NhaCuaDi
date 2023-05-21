@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+
 import { Card, Label, Button, CardBody, FormGroup, Form, Input } from "reactstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-// import { Store } from 'react-notifications-component';
-import { withPromiseAndDispatch } from "../../helpers";
 
+// import { Store } from 'react-notifications-component';
+
+import { withPromiseAndDispatch } from "../../helpers";
 import { signInAsync } from "../../redux/auth/authActions";
 
 import styles from "./styles.module.scss";
-import { useNavigate } from "react-router-dom";
 
 const SignInSchema = Yup.object().shape({
     username: Yup.string().required("Please enter your username"),

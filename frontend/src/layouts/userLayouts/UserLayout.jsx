@@ -3,16 +3,14 @@ import PropTypes from "prop-types";
 import { mockDataStudent } from "data/mockData";
 import { useLocation, useParams } from "react-router-dom";
 
-import { getRoutePath } from "helpers/common";
 import { Box, Divider, Modal, Tab, Tabs, Typography, useTheme } from "@mui/material";
 import { tokens } from "theme";
-import Image from "components/Image";
+
 import "./styles.scss";
 import { CameraAlt } from "@mui/icons-material";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
-import StudentTabs from "components/Student/StudentTabs";
-import Introduction from "components/Introduction";
+import StudentTabs from "components/students/StudentTabs";
 import ImageWithOutLight from "components/Image/ImageWithOutLight";
 import { DataGrid } from "@mui/x-data-grid";
 
@@ -26,7 +24,7 @@ const UserLayout = ({ children }) => {
 
     const [currentStudent, setCurrentStudent] = useState({});
 
-    const [isOpenModalAddLesson, setIsOpenModalAddLesson] = React.useState(false);
+    const [isOpenModalAddLesson, setIsOpenModalAddLesson] = useState(false);
     const handleOpenModalAddLesson = () => setIsOpenModalAddLesson(true);
     const handleCloseModalAddLesson = () => setIsOpenModalAddLesson(false);
 
@@ -47,7 +45,7 @@ const UserLayout = ({ children }) => {
     };
 
     return currentStudent ? (
-        <div className="detail-student-page">
+        <div className="user-layout">
             <div className="header">
                 <div className="cover-photo"></div>
                 <div className="edit-student">

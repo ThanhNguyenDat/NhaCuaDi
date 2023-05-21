@@ -18,3 +18,13 @@ export const getRoutePath = (location, params) => {
     });
     return path;
 };
+
+export const convertSecondsToHoursAndMinutes = (seconds) => {
+    const hours = Math.floor(seconds / 3600); // Số giờ là phần nguyên của phép chia
+    const minutes = Math.floor((seconds % 3600) / 60); // Số phút là phần nguyên của phép chia lấy phần dư
+  
+    return {
+      hours,
+      minutes,
+    };
+  }

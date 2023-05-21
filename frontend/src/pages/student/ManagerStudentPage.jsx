@@ -27,7 +27,7 @@ const ManagerStudentPage = (props) => {
                     <Link
                         to={`${routes.aboutOverviewStudent.replace(":uid", cellValues.row.id)}`}
                         style={{
-                            color: colors.greenAccent[300],
+                            color: colors.blueAccent[300],
                         }}
                     >
                         {cellValues.row.fullname}
@@ -76,7 +76,6 @@ const ManagerStudentPage = (props) => {
                 subtitle={config.breadcrumbs.manageStudent.subtitle}
             />
             <Box
-                m="40px 0 0 0"
                 height="75vh"
                 sx={{
                     "& .MuiDataGrid-root": {
@@ -86,10 +85,10 @@ const ManagerStudentPage = (props) => {
                         borderBottom: "none",
                     },
                     "& .name-column--cell": {
-                        color: colors.greenAccent[300],
+                        color: colors.blueAccent[300],
                     },
                     "& .MuiDataGrid-columnHeaders": {
-                        backgroundColor: colors.blueAccent[700],
+                        backgroundColor: colors.pinkAccent[700],
                         borderBottom: "none",
                     },
                     "& .MuiDataGrid-virtualScroller": {
@@ -97,10 +96,10 @@ const ManagerStudentPage = (props) => {
                     },
                     "& .MuiDataGrid-footerContainer": {
                         borderTop: "none",
-                        backgroundColor: colors.blueAccent[700],
+                        backgroundColor: colors.pinkAccent[700],
                     },
                     "& .MuiCheckbox-root": {
-                        color: `${colors.greenAccent[200]} !important`,
+                        color: `${colors.blueAccent[200]} !important`,
                     },
                     "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
                         color: `${colors.grey[100]} !important`,

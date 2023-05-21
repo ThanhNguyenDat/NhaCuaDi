@@ -22,7 +22,8 @@
             }
         ],
         "@babel/plugin-proposal-object-rest-spread",
-        "@babel/plugin-proposal-optional-chaining"
+        "@babel/plugin-proposal-optional-chaining",
+        ["transform-remove-console", { "exclude": ["error", "warn"] }]
     ],
     "presets": [
         [
@@ -40,7 +41,7 @@
     ],
     "env": {
         "production": {
-            "plugins": ["transform-remove-console"]
+            "plugins": [["transform-remove-console", { "exclude": ["error", "warn"] }]]
         }
     }
 }

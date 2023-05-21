@@ -25,7 +25,7 @@ import Logo from "components/Icons/Logo";
 import config from "config";
 import { getRoutePath } from "helpers/common";
 
-const Topbar = (props) => {
+const Topbar = ({ className }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
@@ -65,7 +65,7 @@ const Topbar = (props) => {
                         {icon && (
                             <Typography
                                 sx={{
-                                    color: colors.grey[100],
+                                    color: colors.pinkAccent[400],
                                 }}
                             >
                                 {icon}
@@ -74,7 +74,7 @@ const Topbar = (props) => {
                         <Typography
                             key="title"
                             sx={{
-                                color: colors.grey[100],
+                                color: colors.pinkAccent[400],
                             }}
                             paddingLeft="4px"
                         >
@@ -82,14 +82,18 @@ const Topbar = (props) => {
                         </Typography>
                     </Box>
                 ) : (
-                    <Link key={index} to={routeTo} style={{ color: colors.grey[100] }}>
+                    <Link key={index} to={routeTo} style={{ color: colors.pinkAccent[400] }}>
                         <Box display="flex">
                             {icon && (
-                                <Typography key="icon" color={colors.grey[100]}>
+                                <Typography key="icon" color={colors.pinkAccent[400]}>
                                     {icon}
                                 </Typography>
                             )}
-                            <Typography key="title" color={colors.grey[100]} paddingLeft="4px">
+                            <Typography
+                                key="title"
+                                color={colors.pinkAccent[400]}
+                                paddingLeft="4px"
+                            >
                                 {title}
                             </Typography>
                         </Box>
@@ -102,7 +106,13 @@ const Topbar = (props) => {
     }, [pathname, theme]);
 
     return (
-        <Box display="flex" justifyContent="space-between" p={2}>
+        <Box
+            className={`top-bar ${className}`}
+            display="flex"
+            justifyContent="space-between"
+            p={2}
+            sx={{ background: colors.grey[900] }}
+        >
             {/* Search */}
             <Box display="flex" key="search">
                 <Box

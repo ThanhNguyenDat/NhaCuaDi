@@ -1,6 +1,7 @@
 {
     "scripts": {
-        "prettify": "prettier --write ."
+        "prettify": "prettier --write .",
+        "deploy-github": "gh-pages -d build"
     },
     "name": "nhacuadi",
     "version": "1.0.0",
@@ -17,6 +18,7 @@
     "homepage": "https://github.com/ThanhNguyenDat/NhaCuaDi#readme",
     "description": "",
     "devDependencies": {
+        "gh-pages": "^5.0.0",
         "prettier": "^2.8.8"
     }
 }

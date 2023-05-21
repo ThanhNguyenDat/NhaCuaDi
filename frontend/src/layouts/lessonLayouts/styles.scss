@@ -1,0 +1,27 @@
+.lesson-layout {
+    .information {
+        padding: 0px 40px 0px 10px;
+        .title,
+        .certificate,
+        .total-time,
+        .parts {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            bottom: 0;
+        
+            .name {
+                font-size: 24px;
+                align-items: center;
+            }
+            
+            .value {
+                margin-left: 10px;
+                font-size: 18px;
+                height: 100%;
+                bottom: 0;
+            }
+        }
+        
+    }
+}

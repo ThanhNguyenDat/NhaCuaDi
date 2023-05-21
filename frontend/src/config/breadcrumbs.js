@@ -53,6 +53,12 @@ const breadcrumbs = {
         title: "User",
         subtitle: "",
     },
+    aboutDetailStudentLesson: {
+        route: routes.aboutDetailStudentLesson,
+        icon: Icons.manageLessonIcon,
+        title: "Manage Lessons",
+        subtitle: "Managing the lesson",
+    },
 
     // Lesson
     manageLesson: {

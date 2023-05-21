@@ -16,12 +16,13 @@ import config from "config";
 import { tokens } from "theme";
 
 import "./styles.scss";
+import { If } from "components/If";
 
 const Sidebar = (props) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
-    const { collapseSidebar, toggleSidebar, collapsed, toggled, broken, rtl } = useProSidebar();
+    const { collapseSidebar, toggleSidebar, collapsed, toggled, broken, rtl } = new useProSidebar();
 
     const [selected, setSelected] = useState("Dashboard");
 
@@ -33,7 +34,7 @@ const Sidebar = (props) => {
     }, [pathname]);
 
     return (
-        <div className="sidebar">
+        <div className={`side-bar ${collapsed ? "collapsed" : ""}`}>
             <ProSidebar
                 className="ps-sidebar-root"
                 backgroundColor={`${colors.primary[400]} !important`}
@@ -55,9 +56,10 @@ const Sidebar = (props) => {
                             justifyContent: "center",
                             alignItems: "center",
                             display: "flex",
+                            width: "300px",
                         }}
                     >
-                        {!collapsed && (
+                        <If condition={!collapsed}>
                             <div className="top">
                                 <Typography variant="h3" color={colors.grey[100]}>
                                     <Logo />
@@ -66,10 +68,10 @@ const Sidebar = (props) => {
                                     <MenuOutlined />
                                 </IconButton>
                             </div>
-                        )}
+                        </If>
                     </MenuItem>
 
-                    {!collapsed && (
+                    <If condition={!collapsed}>
                         <div className="profile-user">
                             <div className="avatar">
                                 <Image
@@ -90,7 +92,7 @@ const Sidebar = (props) => {
                                 </Typography>
                             </div>
                         </div>
-                    )}
+                    </If>
 
                     <div
                         className="routes"

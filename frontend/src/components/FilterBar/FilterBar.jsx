@@ -15,7 +15,7 @@ const FilterBar = () => {
     const handleClearFilters = () => {
         clearFilters();
     };
-    console.log("filters: ", filters);
+
     return (
         <div className="filter-bar">
             <table>
@@ -25,7 +25,9 @@ const FilterBar = () => {
                     <th>Value</th>
                 </tr>
                 <tr>
-                    <td><input onChange={handleFilterChange}/></td>
+                    <td>
+                        <input onChange={handleFilterChange} />
+                    </td>
                     <td>
                         <select>
                             <option>1</option>
@@ -33,7 +35,9 @@ const FilterBar = () => {
                             <option>3</option>
                         </select>
                     </td>
-                    <td><input onChange={handleFilterChange}/></td>
+                    <td>
+                        <input onChange={handleFilterChange} />
+                    </td>
                 </tr>
             </table>
             <button>Add More Filter</button>

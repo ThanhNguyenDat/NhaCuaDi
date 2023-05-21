@@ -1,83 +1,31 @@
+// app layout
 .app-layout {
     display: flex;
 
     height: 100%;
     width: 100%;
-    .content {
-        padding-left: 10px;
-    }
-}
 
-.detail-student-page {
-    // display: flex;
-    // flex-direction: column;
-
-    padding-top: 10px;
-    padding-left: 30px;
-    padding-right: 30px;
-
-    .header {
-        display: block;
-        font-family: inherit;
-
-        .cover-photo {
-        }
-        .edit-student {
-            display: flex;
-
-            align-items: center;
-
-            font-family: inherit;
-
-            .avatar {
-                position: relative;
-                margin-right: 20px;
-                .image {
-                    height: 168px;
-                    width: 168px;
-                    cursor: pointer;
-                    border-radius: 50%;
-                }
-                .upload-icon {
-                    position: absolute;
-                    bottom: 25px;
-                    right: 25px;
-                    transform: translate(50%, 50%);
-                    z-index: 2;
-                    cursor: pointer;
-                    border-radius: 50%;
-                }
-            }
-            .contact-student {
-                display: block;
-                flex-grow: 1;
-                height: 100%;
-                align-self: center;
-                .name {
-                    font-size: 3rem;
-                }
-                .email {
-                    font-size: 2rem;
-                }
-            }
-
-            .action-icons {
-                display: flex;
-                height: 100%;
-                font-size: 1rem;
-                .add-lesson-action,
-                .edit-student-action {
-                    padding: 6px;
-                    margin: 5px;
-                    cursor: pointer;
-                    border-radius: 5px;
-                }
-            }
-        }
+    .side-bar {
+        height: 100%;
     }
 
-    .content {
-        height: max(404px, 100%);
-        margin-top: 20px;
+    .right {
+        height: max-content;
+
+        width: 100%;
+        .top-bar {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+
+            &.sticked {
+                padding-left: 10px;
+            }
+        }
+
+        .content {
+            position: relative;
+            padding: 20px;
+        }
     }
 }

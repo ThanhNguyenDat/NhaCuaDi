@@ -1,12 +1,11 @@
 import React, { lazy } from "react";
-import PropTypes from "prop-types";
 import WaitingComponent from "hocs/WaitingComponents";
 import AuthComponent from "hocs/withAuthRequired";
 
 // layout
 import AppLayout from "./layouts/AppLayout";
-import UserLayout from "layouts/UserLayout";
-import Introduction from "components/Introduction";
+import UserLayout from "layouts/userLayouts/UserLayout";
+import IntroductionUserLayout from "layouts/userLayouts/IntroductionUserLayout";
 
 import config from "config";
 
@@ -26,6 +25,11 @@ import LessonStudentPage from "pages/student/LessonStudentPage";
 import ManagerLessonsPage from "pages/lessons/ManagerLessonsPage";
 import CreateNewLessonPage from "pages/lessons/CreateNewLessonPage";
 import DashboardPage from "pages/user/DashboardPage";
+import HomePage from "pages/homepage";
+import LessonLayout from "layouts/lessonLayouts/LessonLayout";
+import FAQsLessonPage from "pages/lessons/FAQsLessonPage";
+import AboutStudentsLessonPage from "pages/lessons/AboutStudentsLessonPage";
+import DetailStudentLessonPage from "pages/lessons/DetailStudentLessonPage";
 
 const LoginPage = lazy(() => import("./pages/login"));
 const Notfound = lazy(() => import("./pages/notfound"));
@@ -34,29 +38,25 @@ const routes = [
     {
         path: config.routes.home,
         element: (
-            <AuthComponent>
-                <AppLayout>Hi</AppLayout>
-            </AuthComponent>
+            <AppLayout>
+                <HomePage />
+            </AppLayout>
         ),
     },
     {
         path: config.routes.profile,
         element: (
-            <AuthComponent>
-                <AppLayout>
-                    <ProfilePage />
-                </AppLayout>
-            </AuthComponent>
+            <AppLayout>
+                <ProfilePage />
+            </AppLayout>
         ),
     },
     {
         path: config.routes.dashboard,
         element: (
-            <AuthComponent>
-                <AppLayout>
-                    <DashboardPage />
-                </AppLayout>
-            </AuthComponent>
+            <AppLayout>
+                <DashboardPage />
+            </AppLayout>
         ),
     },
     {
@@ -65,11 +65,9 @@ const routes = [
             {
                 path: config.routes.manageStaff,
                 element: (
-                    <AuthComponent roles={["admin"]}>
-                        <AppLayout>
-                            <ManagerStaffPage />
-                        </AppLayout>
-                    </AuthComponent>
+                    <AppLayout>
+                        <ManagerStaffPage />
+                    </AppLayout>
                 ),
             },
         ],
@@ -80,51 +78,47 @@ const routes = [
             {
                 path: config.routes.manageStudent,
                 element: (
-                    <AuthComponent roles={["admin"]}>
-                        <AppLayout>
-                            <ManagerStudentPage />
-                        </AppLayout>
-                    </AuthComponent>
+                    <AppLayout>
+                        <ManagerStudentPage />
+                    </AppLayout>
                 ),
             },
             {
                 path: config.routes.aboutOverviewStudent,
                 element: (
-                    <AuthComponent roles={["admin"]}>
-                        <AppLayout>
-                            <UserLayout>
-                                <Introduction>
-                                    <Overview />
-                                </Introduction>
-                            </UserLayout>
-                        </AppLayout>
-                    </AuthComponent>
+                    <AppLayout>
+                        <UserLayout>
+                            <IntroductionUserLayout>
+                                <Overview />
+                            </IntroductionUserLayout>
+                        </UserLayout>
+                    </AppLayout>
                 ),
             },
             {
                 path: config.routes.aboutWorkAndEducationStudent,
                 element: (
-                    <AuthComponent roles={["admin"]}>
-                        <AppLayout>
-                            <UserLayout>
-                                <Introduction>
-                                    <WorkAndEducation />
-                                </Introduction>
-                            </UserLayout>
-                        </AppLayout>
-                    </AuthComponent>
+                    // <AuthComponent roles={["admin"]}>
+                    <AppLayout>
+                        <UserLayout>
+                            <IntroductionUserLayout>
+                                <WorkAndEducation />
+                            </IntroductionUserLayout>
+                        </UserLayout>
+                    </AppLayout>
+                    // </AuthComponent>
                 ),
             },
             {
                 path: config.routes.aboutLessonsStudent,
                 element: (
-                    <AuthComponent roles={["admin"]}>
-                        <AppLayout>
-                            <UserLayout>
-                                <LessonStudentPage />
-                            </UserLayout>
-                        </AppLayout>
-                    </AuthComponent>
+                    // <AuthComponent roles={["admin"]}>
+                    <AppLayout>
+                        <UserLayout>
+                            <LessonStudentPage />
+                        </UserLayout>
+                    </AppLayout>
+                    // </AuthComponent>
                 ),
             },
         ],
@@ -137,29 +131,55 @@ const routes = [
             {
                 path: config.routes.manageLesson,
                 element: (
-                    <AuthComponent roles={["admin"]}>
-                        <AppLayout>
-                            <ManagerLessonsPage />
-                        </AppLayout>
-                    </AuthComponent>
+                    <AppLayout>
+                        <ManagerLessonsPage />
+                    </AppLayout>
                 ),
             },
             {
                 path: config.routes.createNewLesson,
                 element: (
-                    <AuthComponent roles={["admin"]}>
-                        <AppLayout>
-                            <CreateNewLessonPage />
-                        </AppLayout>
-                    </AuthComponent>
+                    <AppLayout>
+                        <CreateNewLessonPage />
+                    </AppLayout>
                 ),
             },
             {
-                path: "/lessons/:lesson_id",
+                path: config.routes.aboutOverViewLesson,
                 element: (
-                    <AuthComponent roles={["admin"]}>
-                        <AppLayout>Lesson detail</AppLayout>
-                    </AuthComponent>
+                    <AppLayout>
+                        <LessonLayout>Charts?</LessonLayout>
+                    </AppLayout>
+                ),
+            },
+            {
+                path: config.routes.aboutStudentsLesson,
+                element: (
+                    <AppLayout>
+                        <LessonLayout>
+                            <AboutStudentsLessonPage />
+                        </LessonLayout>
+                    </AppLayout>
+                ),
+            },
+            {
+                path: config.routes.aboutFAQsLesson,
+                element: (
+                    <AppLayout>
+                        <LessonLayout>
+                            <FAQsLessonPage />
+                        </LessonLayout>
+                    </AppLayout>
+                ),
+            },
+            {
+                path: config.routes.aboutDetailStudentLesson,
+                element: (
+                    <AppLayout>
+                        <LessonLayout>
+                            <DetailStudentLessonPage />
+                        </LessonLayout>
+                    </AppLayout>
                 ),
             },
         ],

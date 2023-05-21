@@ -11,30 +11,16 @@ import {
     useTheme,
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
+
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import PersonRemoveOutlinedIcon from "@mui/icons-material/PersonRemoveOutlined";
 
+import PositiveTypography from "components/PositiveTypography";
+import NegativeTypography from "components/NegativeTypography";
 import { tokens } from "theme";
 import "./styles.scss";
-
-const Positive = ({ value }) => {
-    return (
-        <Box className="item-result positive">
-            <KeyboardArrowUpOutlinedIcon /> {value}
-        </Box>
-    );
-};
-
-const Negative = ({ value }) => {
-    return (
-        <Box className="item-result negative">
-            <KeyboardArrowUpOutlinedIcon /> {value}
-        </Box>
-    );
-};
+import { Link } from "react-router-dom";
 
 const LessonItem = ({
     lesson_id,
@@ -64,9 +50,9 @@ const LessonItem = ({
     };
 
     return (
-        <Box
+        <Link
             className="lesson-item"
-            sx={{
+            style={{
                 // background: colors.grey[1000],
                 boxShadow: `0 1px 2px ${colors.grey[200]}`,
             }}
@@ -91,25 +77,36 @@ const LessonItem = ({
             </Box>
 
             <Box className="bottom">
-                <Box className="featureChart">69%</Box>
-                <Typography className="title" variant="p" sx={{ color: colors.grey[200] }}>
+                <Box 
+                className="featureChart"
+                color={colors.grey[100]}
+                >69%</Box>
+                <Typography 
+                    className="title" 
+                    variant="p" 
+                    sx={{ color: colors.grey[200] }}
+                >
                     {title}
                 </Typography>
-                <Typography className="amount" variant="p">
+                <Typography 
+                    className="amount" 
+                    variant="p"
+                    color={colors.pinkAccent[100]}
+                >
                     <AccessTimeIcon /> {amount}
                 </Typography>
                 <Box className="summary">
                     <Box className="item">
                         <Typography className="item-title">Current</Typography>
-                        <Negative value={current_score} />
+                        <NegativeTypography className="item-result" value={current_score} />
                     </Box>
                     <Box className="item">
                         <Typography className="item-title">Average</Typography>
-                        <Positive value={average_score} />
+                        <PositiveTypography className="item-result" value={average_score} />
                     </Box>
                     <Box className="item">
                         <Typography className="item-title">Max</Typography>
-                        <Positive value={max_score} />
+                        <PositiveTypography className="item-result" value={max_score} />
                     </Box>
                 </Box>
             </Box>
@@ -162,7 +159,7 @@ const LessonItem = ({
                 </MenuItem>
                 <Divider />
             </Menu>
-        </Box>
+        </Link>
     );
 };
 
