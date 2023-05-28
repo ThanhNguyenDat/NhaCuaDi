@@ -2,7 +2,6 @@
     .control-bar {
         display: flex;
         justify-content: space-between;
-
         .create-new-lesson {
             display: flex;
             align-items: center;
@@ -88,6 +87,20 @@
                     }
                 }
             }
+        }
+    }
+
+    .users-lesson {
+        height: 75vh;
+        display: flex;
+        flex-direction: column;
+        .row-user-lesson {
+            display: flex;
+            align-items: center;
+
+            padding-left: 10px;
+            padding-right: 10px;
+            height: 60px;
         }
     }
 

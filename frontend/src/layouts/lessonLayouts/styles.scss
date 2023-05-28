@@ -1,27 +1,48 @@
 .lesson-layout {
-    .information {
-        padding: 0px 40px 0px 10px;
-        .title,
-        .certificate,
-        .total-time,
-        .parts {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            bottom: 0;
-        
-            .name {
-                font-size: 24px;
+    .header {
+        display: flex;
+        justify-content: space-between;
+
+        .information {
+            padding: 0px 40px 0px 10px;
+            .title,
+            .certificate,
+            .total-time,
+            .parts {
+                display: flex;
+                flex-direction: row;
                 align-items: center;
-            }
-            
-            .value {
-                margin-left: 10px;
-                font-size: 18px;
-                height: 100%;
                 bottom: 0;
+
+                .name {
+                    font-size: 24px;
+                    align-items: center;
+                }
+
+                .value {
+                    margin-left: 10px;
+                    font-size: 18px;
+                    height: 100%;
+                    bottom: 0;
+                }
             }
         }
-        
+        .control {
+            .add-student {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                // padding: var(--control-bar-height);
+                padding: 10px;
+
+                border-radius: 5px;
+                cursor: pointer;
+
+                .icon {
+                    margin-right: 10px;
+                }
+            }
+        }
     }
 }

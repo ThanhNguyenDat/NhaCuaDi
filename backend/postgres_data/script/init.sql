@@ -57,6 +57,19 @@ CREATE TABLE "lessons" (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
+CREATE TABLE "user_lesson" (
+    id SERIAL PRIMARY KEY,
+    -- user_id INTEGER REFERENCES "user"(id),
+    -- role_id INTEGER REFERENCES "role"(id),
+    user_id INTEGER NOT NULL,
+    lesson_id INTEGER NOT NULL,
+    
+    CONSTRAINT "fk_user_lesson_users_id" FOREIGN KEY ("user_id") REFERENCES "users" ("id"),
+
+    CONSTRAINT "fk_user_lesson_lessons_id" FOREIGN KEY ("lesson_id") REFERENCES "lessons" ("id")
+);
+
 CREATE TABLE "lesson_sessions" (
     id SERIAL PRIMARY KEY,
     user_id INTEGER,
@@ -69,6 +82,8 @@ CREATE TABLE "lesson_sessions" (
     CONSTRAINT "fk_lesson_sessions_lessons_id" FOREIGN KEY ("lesson_id") REFERENCES "lessons" ("id"),
     CONSTRAINT "fk_lesson_sessions_users_id" FOREIGN KEY ("user_id") REFERENCES "users" ("id")
 );
+
+
 
 CREATE TABLE "classes" (
     id SERIAL PRIMARY KEY
@@ -121,5 +136,11 @@ CSV HEADER;
 
 COPY "lesson_sessions"
 FROM '/tmp/dump/lesson_sessions.csv'
+DELIMITER ','
+CSV HEADER;
+
+
+COPY "user_lesson"
+FROM '/tmp/dump/user_lesson.csv'
 DELIMITER ','
 CSV HEADER;

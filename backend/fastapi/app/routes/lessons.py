@@ -48,13 +48,14 @@ async def get_lesson(request: Request):
     response = JSONResponse(content=content)
     return response
 
-@router.post("/add-user")
-async def _add_user_to_lesson(request: Request):
+@router.post("/add-student")
+async def add_student_to_lesson_route(request: Request):
     req = await request.json()
     lesson_id = req.get("lesson_id")
     user_id = req.get("user_id")
-
-    status = add_user_to_lesson(lesson_id, user_id)
+    print(lesson_id, user_id)
+    return 1
+    status = add_student_to_lesson(lesson_id, user_id)
     content = {
         "error_code": 0,
         "message": "add success",
@@ -81,3 +82,15 @@ async def delete_user(request: Request):
     response = JSONResponse(content=content)
     return response
 
+
+# version 2.0
+@router.get("/get-list-brief-lessons")
+async def get_list_brief_lessons_route():
+    data = get_list_brief_lessons()
+    content = {
+        "error_code": 0,
+        "message": "add success",
+        "data": data
+    }
+    response = JSONResponse(content=content)
+    return response

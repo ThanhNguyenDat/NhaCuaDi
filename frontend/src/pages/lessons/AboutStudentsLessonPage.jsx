@@ -4,16 +4,15 @@ import { Link, useParams } from "react-router-dom";
 
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 
-import { Box, LinearProgress, Typography, useTheme } from "@mui/material";
+import { Box, LinearProgress, Modal, Typography, useTheme } from "@mui/material";
 import PersonRemoveOutlinedIcon from "@mui/icons-material/PersonRemoveOutlined";
-import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
 
 import ReactECharts from "components/Charts/ReactECharts";
 import { mockDataLesson } from "data/mockData";
 
 import routes from "config/routes";
 import { tokens } from "theme";
-
+import RowUserLesson from "components/lessons/RowUserLesson";
 const AboutStudentsLessonPage = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -109,7 +108,6 @@ const AboutStudentsLessonPage = () => {
         },
     ];
     const [userRows, setUserRows] = useState([]);
-    const optionChart1 = {};
 
     const handleHoverRow = (event) => {
         setSelectedRow(Number(event.currentTarget.getAttribute("data-id")));
@@ -131,18 +129,7 @@ const AboutStudentsLessonPage = () => {
         <div className="about-students-lesson-page">
             <div className="control-bar">
                 <div className="filter-bar">Filter bar</div>
-                <div className="action-icons">
-                    <div
-                        className="add-student"
-                        style={{
-                            backgroundColor: colors.pinkAccent[100],
-                            color: colors.grey[900],
-                        }}
-                        onClick={() => {}}
-                    >
-                        <PersonAddAltOutlinedIcon className="icon" /> Add Student
-                    </div>
-                </div>
+                <div className="action-icons"></div>
             </div>
             <Box
                 className="table-user"
@@ -188,11 +175,13 @@ const AboutStudentsLessonPage = () => {
                 />
             </Box>
 
-            <Box className="charts">
-                <div className="">
-                    <ReactECharts option={optionChart1} />
-                </div>
-            </Box>
+            {/* <div className="users-lesson">
+                {userRows.map(user => (
+                    <RowUserLesson {...user}/>
+                ))}    
+            </div>
+            
+            <div className="full-user"></div> */}
         </div>
     );
 };

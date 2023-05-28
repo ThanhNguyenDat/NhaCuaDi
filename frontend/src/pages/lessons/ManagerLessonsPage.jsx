@@ -13,17 +13,20 @@ import LessonItem from "components/lessons/LessonItem";
 import config from "config";
 import "./styles.scss";
 import { mockDataLesson } from "data/mockData";
+import { useNavigate } from "react-router-dom";
 
 const ManagerLessonsPage = (props) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+
+    const navigate = useNavigate();
 
     const { params, setParams } = useFilterBar();
 
     const [listLessons, setListLessons] = useState([]);
 
     const onClickCreateNewLesosn = () => {
-        alert("create new lesson");
+        navigate(config.routes.createNewLesson);
     };
 
     useEffect(() => {
@@ -61,6 +64,7 @@ const ManagerLessonsPage = (props) => {
             <div className="multi-lessons">
                 {listLessons.map((lesson) => (
                     <LessonItem
+                        id={lesson.id}
                         certificate={lesson.certificate}
                         title={lesson.title}
                         subTitle={lesson.subTitle}

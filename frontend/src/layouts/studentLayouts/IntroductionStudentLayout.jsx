@@ -8,7 +8,7 @@ import Item from "components/Sidebars/Item";
 import config from "config";
 import "./styles.scss";
 
-const IntroductionUserLayout = ({ children }) => {
+const IntroductionStudentLayout = ({ children }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const params = useParams();
@@ -56,6 +56,6 @@ const IntroductionUserLayout = ({ children }) => {
     );
 };
 
-IntroductionUserLayout.propTypes = {};
+IntroductionStudentLayout.propTypes = {};
 
-export default IntroductionUserLayout;
+export default IntroductionStudentLayout;

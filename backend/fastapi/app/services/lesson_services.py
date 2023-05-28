@@ -1,6 +1,7 @@
 
 from typing import Union
 import json
+from ailabtools.connection_pool_postgresql import ConnectionPoolPostgreSql
 
 from sqlalchemy.sql import text, delete, update
 
@@ -10,6 +11,11 @@ from ..models.accountModel import Users
 from ..database.postgres import DBSession
 from ..common.http_exceptions import *
 from ..common.helpers import *
+import os
+
+
+# postgresql://postgres:postgres@db:5432/nhacuadi
+db = ConnectionPoolPostgreSql(min=0, max=1, host="db", port=5432, user="postgress", password="postgress", database="nhacuadi")
 
 def get_all_lessons():
     session = DBSession()
@@ -76,13 +82,13 @@ def get_lesson_information(id):
 
     return _result
 
-def add_user_to_lesson(lesson_id, user_id):
-    session = DBSession()
-    ls = LessonSessions(user_id=user_id, lesson_id=lesson_id)
+def add_student_to_lesson(lesson_id, user_id):
+    db.execute('''
+        INSER INTO "user_lesson" (user_id, lesson_id) 
+        VALUES (%s, %s) 
+    ''', (lesson_id, user_id))
     
-    session.add(ls)
-    session.commit()
-    return ls
+    return True
 
 def delete_user_from_lesson(lesson_id, user_id):
     session = DBSession()
@@ -91,3 +97,13 @@ def delete_user_from_lesson(lesson_id, user_id):
     session.close()
     
     return True
+
+def get_list_brief_lessons():
+    data = []
+    result = db.execute('SELECT id FROM "lessons"')
+    
+    print(result)
+    
+
+
+    return data

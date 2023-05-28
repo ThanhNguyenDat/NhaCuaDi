@@ -19,9 +19,13 @@ const routes = {
     aboutOverViewLesson: "/lessons/:lesson_id/about_overview",
     aboutStudentsLesson: "/lessons/:lesson_id/about_students",
     aboutDetailStudentLesson: "/lessons/:lesson_id/about_students/:uid",
-
-    aboutFAQsLesson: "/lessons/:lesson_id/about_faqs",
     createNewLesson: "/lessons/create-new-lesson",
+    aboutFAQsLesson: "/lessons/:lesson_id/about_faqs",
+
+    // sales
+
+    // FAQs
+    faq: "faqs",
 };
 
 export default routes;

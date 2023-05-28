@@ -13,8 +13,9 @@ import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
 import StudentTabs from "components/students/StudentTabs";
 import ImageWithOutLight from "components/Image/ImageWithOutLight";
 import { DataGrid } from "@mui/x-data-grid";
+import ModalAddLessonStudent from "components/students/ModalAddLessonStudent";
 
-const UserLayout = ({ children }) => {
+const StudentLayout = ({ children }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
@@ -107,39 +108,16 @@ const UserLayout = ({ children }) => {
             />
             <StudentTabs uid={uid} />
             <div className="content">{children}</div>
-
-            <Modal
-                open={isOpenModalAddLesson}
-                onClose={handleCloseModalAddLesson}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box
-                    sx={{
-                        position: "absolute",
-                        top: "10%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        width: "80vw",
-                        bgcolor: "background.paper",
-                        border: "2px solid #000",
-                        boxShadow: 24,
-                        p: 4,
-                    }}
-                >
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Add More Lesson
-                    </Typography>
-
-                    <DataGrid columns={[]} rows={[]} />
-                </Box>
-            </Modal>
+            <ModalAddLessonStudent
+                isOpenModalAddLesson={isOpenModalAddLesson}
+                handleCloseModalAddLesson={handleCloseModalAddLesson}
+            />
         </div>
     ) : (
         <div className="detail-student-page">No data in student</div>
     );
 };
 
-UserLayout.propTypes = {};
+StudentLayout.propTypes = {};
 
-export default UserLayout;
+export default StudentLayout;

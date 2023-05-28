@@ -4,9 +4,10 @@ import AuthComponent from "hocs/withAuthRequired";
 
 // layout
 import AppLayout from "./layouts/AppLayout";
-import UserLayout from "layouts/userLayouts/UserLayout";
-import IntroductionUserLayout from "layouts/userLayouts/IntroductionUserLayout";
-
+// import UserLayout from "layouts/userLayouts/UserLayout";
+// import IntroductionUserLayout from "layouts/userLayouts/IntroductionUserLayout";
+import StudentLayout from "layouts/studentLayouts/StudentLayout";
+import IntroductionStudentLayout from "layouts/studentLayouts/IntroductionStudentLayout";
 import config from "config";
 
 // user pages
@@ -87,11 +88,11 @@ const routes = [
                 path: config.routes.aboutOverviewStudent,
                 element: (
                     <AppLayout>
-                        <UserLayout>
-                            <IntroductionUserLayout>
+                        <StudentLayout>
+                            <IntroductionStudentLayout>
                                 <Overview />
-                            </IntroductionUserLayout>
-                        </UserLayout>
+                            </IntroductionStudentLayout>
+                        </StudentLayout>
                     </AppLayout>
                 ),
             },
@@ -100,11 +101,11 @@ const routes = [
                 element: (
                     // <AuthComponent roles={["admin"]}>
                     <AppLayout>
-                        <UserLayout>
-                            <IntroductionUserLayout>
+                        <StudentLayout>
+                            <IntroductionStudentLayout>
                                 <WorkAndEducation />
-                            </IntroductionUserLayout>
-                        </UserLayout>
+                            </IntroductionStudentLayout>
+                        </StudentLayout>
                     </AppLayout>
                     // </AuthComponent>
                 ),
@@ -114,9 +115,9 @@ const routes = [
                 element: (
                     // <AuthComponent roles={["admin"]}>
                     <AppLayout>
-                        <UserLayout>
+                        <StudentLayout>
                             <LessonStudentPage />
-                        </UserLayout>
+                        </StudentLayout>
                     </AppLayout>
                     // </AuthComponent>
                 ),

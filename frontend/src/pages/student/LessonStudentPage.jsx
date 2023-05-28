@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import {
     Box,
@@ -20,7 +20,9 @@ import PositiveTypography from "components/PositiveTypography";
 import NegativeTypography from "components/NegativeTypography";
 import { tokens } from "theme";
 import "./styles.scss";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { mockDataStudent } from "data/mockData";
+import { If } from "components/If";
 
 const LessonItem = ({
     lesson_id,
@@ -30,6 +32,7 @@ const LessonItem = ({
     current_score,
     average_score,
     max_score,
+    to,
 }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -56,6 +59,7 @@ const LessonItem = ({
                 // background: colors.grey[1000],
                 boxShadow: `0 1px 2px ${colors.grey[200]}`,
             }}
+            to={to}
         >
             <Box className="top">
                 <Typography className="topic" variant="h1" color={colors.grey[100]}>
@@ -77,22 +81,13 @@ const LessonItem = ({
             </Box>
 
             <Box className="bottom">
-                <Box 
-                className="featureChart"
-                color={colors.grey[100]}
-                >69%</Box>
-                <Typography 
-                    className="title" 
-                    variant="p" 
-                    sx={{ color: colors.grey[200] }}
-                >
+                <Box className="featureChart" color={colors.grey[100]}>
+                    69%
+                </Box>
+                <Typography className="title" variant="p" sx={{ color: colors.grey[200] }}>
                     {title}
                 </Typography>
-                <Typography 
-                    className="amount" 
-                    variant="p"
-                    color={colors.pinkAccent[100]}
-                >
+                <Typography className="amount" variant="p" color={colors.pinkAccent[100]}>
                     <AccessTimeIcon /> {amount}
                 </Typography>
                 <Box className="summary">
@@ -167,44 +162,32 @@ const LessonStudentPage = (props) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const [listLessons, setListLessons] = useState([]);
+    const route_params = useParams();
+    const uid = useMemo(() => route_params.uid, [route_params]);
 
     useEffect(() => {
-        const fakeData = [
-            {
-                lesson_id: 1,
-                topic: "Ielts - Reading",
-                title: "Ielts 2022",
-                amount: "30",
-                current_score: "6",
-                average_score: "5",
-                max_score: "9",
-            },
-            {
-                lesson_id: 2,
-                topic: "Toeic - Pronunciation",
-                title: "Toeic 2019",
-                amount: "30",
-                current_score: "1",
-                average_score: "1.5",
-                max_score: "2",
-            },
-        ];
-        setListLessons(fakeData);
+        console.log(mockDataStudent);
+        const dataFetch = mockDataStudent.find((data) => data.id.toString() === uid.toString());
+        setListLessons(dataFetch?.lessons);
     }, []);
+
+    const handleDeleteLesson = () => {};
 
     return (
         <Box className="lesson-student-page">
-            {listLessons.map((data) => (
-                <LessonItem
-                    lesson_id={data.lesson_id}
-                    topic={data.topic}
-                    title={data.title}
-                    amount={data.amount}
-                    current_score={data.current_score}
-                    average_score={data.average_score}
-                    max_score={data.max_score}
-                />
-            ))}
+            <If condition={listLessons}>
+                {listLessons.map((data) => (
+                    <LessonItem
+                        lesson_id={data.lesson_id}
+                        topic={data.topic}
+                        title={data.title}
+                        amount={data.amount}
+                        current_score={data.current_score}
+                        average_score={data.average_score}
+                        max_score={data.max_score}
+                    />
+                ))}
+            </If>
         </Box>
     );
 };

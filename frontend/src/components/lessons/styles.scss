@@ -85,3 +85,66 @@
         }
     }
 }
+
+.row-user-lesson {
+    height: 40px;
+    border-radius: 4px;
+    word-break: break-word;
+    border-bottom: 1px solid hsla(0, 0, 100%, 0.05);
+
+    &:hover {
+        background-color: hsla(0, 0%, 100%, 0.1);
+    }
+}
+
+.user-box {
+    display: flex;
+    width: 404px;
+    .image {
+    }
+    .info {
+        display: flex;
+        flex-direction: column;
+
+        .name,
+        .email {
+            font-size: 14px !important;
+            font-family: "Inter", sans-serif;
+        }
+    }
+}
+
+
+.modal-add-student-lesson {
+    
+}
+
+.student-row {
+    --dt-outline-variant: #c7c7c7;
+    
+    display: flex;
+    width: 100%;
+    height: 38px;
+    margin-top: 20px;
+    align-items: center;
+    border-bottom: 1px solid transparent;
+    border-bottom-color: var(--dt-outline-variant, rgb(218, 220, 224));
+
+    .id {
+        width: 5%;
+    }
+    .name {
+        width: 45%;
+    }
+    .email {
+        width: 35%;
+    }
+    .actions {
+        width: 15%;
+        display: flex;
+        .icon {
+            cursor: pointer;
+            margin-right: 20px;
+        }
+    }
+}

@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import _ from "lodash";
 
 const LessonItem = ({
+    id,
     certificate,
     title,
     subTitle,
@@ -67,6 +68,7 @@ const LessonItem = ({
 
     const onMoreIcon = (event) => {
         event.preventDefault();
+        alert(id);
     };
 
     return (
